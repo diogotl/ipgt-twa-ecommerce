@@ -13,7 +13,7 @@ type SignInData = {
 type AuthContextData = {
     signIn(data: SignInData): Promise<void>
     isAuth: boolean;
-    user: User
+    user: any
 }
 
 type AuthProviderProps = {
@@ -24,15 +24,24 @@ export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [user, setUser] = useState({} as User)
+    const [user, setUser] = useState('')
     const [isAuth, setIsAuth] = useState(false)
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem('@Token')
+    useEffect(() => {
 
-    //     api.get('/produto')
+        async function loadUser() {
+            const username = localStorage.getItem('@Username')
+            const token = localStorage.getItem('@Token')
 
-    // }, [])
+            if (token && username) {
+                api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                setUser(username)
+                setIsAuth(true)
+            }
+        }
+        loadUser()
+    }, [])
+    
 
     async function signIn({ username, password }: SignInData) {
 
@@ -45,12 +54,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             const { token } = response.data;
 
-            setUser({ username })
+            setUser(username)
+            console.log(user + 'aqui')
+
+            localStorage.setItem('@Username', username)
+            localStorage.setItem('@Token', token)
+
+            api.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
 
             setIsAuth(true)
-
-            localStorage.setItem('@Token', token)
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 
         } catch (error) {

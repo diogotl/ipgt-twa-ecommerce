@@ -6,9 +6,9 @@ import { ProductList } from "./styles";
 export function Dashboard() {
 
 
-    const { user, signIn,isAuth } = useContext(AuthContext)
+    const { user,isAuth } = useContext(AuthContext)
 
-    console.log(user.username,isAuth)
+    console.log(user,isAuth)
 
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -29,7 +29,7 @@ export function Dashboard() {
 
     useEffect(() => {
         async function loadProducts() {
-          const productsResponse = await api.get<Product[]>("produto");
+          const productsResponse = await api.get<Product[]>("/produto");
     
           const productsFormatted = productsResponse.data.map((product) => {
             return {

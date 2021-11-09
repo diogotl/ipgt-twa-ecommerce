@@ -1,7 +1,7 @@
-import { FormEvent, useContext, useState } from 'react'
+import { FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth';
-import styles from '../../styles/SignIn.module.css';
+import styles from './SignIn.module.css';
 
 export function SignIn() {
 
@@ -12,6 +12,12 @@ export function SignIn() {
 
     let navigate = useNavigate();
 
+    useEffect(() => {
+        if (isAuth) {
+            navigate('/dashboard')
+        }
+    }, [isAuth])
+
     async function handleSubmit(event: FormEvent) {
 
         event.preventDefault()
@@ -21,12 +27,7 @@ export function SignIn() {
             password
         }
 
-        await signIn(data);
-
-        if (isAuth) {
-            navigate('/dashboard')
-        }
-
+        await signIn(data)
     }
 
     return (
