@@ -9,9 +9,9 @@ export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/sign" element={<Initial/>} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sign" element={<Initial />} />
       </Routes>
     </BrowserRouter>
   );
