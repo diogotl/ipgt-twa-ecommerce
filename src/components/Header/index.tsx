@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdShoppingBasket } from 'react-icons/md';
+import { HiOutlineShoppingCart, } from 'react-icons/hi';
+import { RiAdminLine } from 'react-icons/ri';
+//RiAdminFill
 
-import { Container, Cart } from './styles';
+import { Container, Content, Cart, HUE } from './styles';
 //import { useCart } from '../../hooks/useCart';
 
 export function Header() {
@@ -12,22 +14,26 @@ export function Header() {
 
   return (
     <Container>
-      <Link to="/">
-        <h1>whisla</h1>
-        {/* <img src={logo} alt="Rocketshoes" /> */}
-      </Link>
+      <Content>
+        <Link to="/">
+          <h1>whisla</h1>
+          {/* <img src={logo} alt="Rocketshoes" /> */}
+        </Link>
 
-      <Cart to="/cart">
-        <div>
-          <strong>Meu carrinho</strong>
-          <span data-testid="cart-size">
-            {/* {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`} */}
-          </span>
-        </div>
-        <MdShoppingBasket size={36} color="#FFF" />
-      </Cart>
+        <Cart>
+
+          <HUE to="/cart">
+            <HiOutlineShoppingCart size={24} color="#FFF" />
+            <div>
+              <strong>Meu carrinho</strong>
+              <span data-testid="cart-size">
+                {/* {cartSize === 1 ? `${cartSize} item` : `${cartSize} itens`} */}
+              </span>
+            </div>
+            <HiOutlineShoppingCart size={24} color="#FFF" />
+          </HUE>
+        </Cart>
+      </Content>
     </Container>
   );
 };
-
-export default Header;

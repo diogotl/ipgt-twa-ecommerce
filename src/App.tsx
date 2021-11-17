@@ -1,18 +1,23 @@
-import { AuthProvider } from "./contexts/Auth";
 import { AppRoutes } from "./routes";
 
-import GlobalStyles from './styles/globalStyle';
+import { GlobalStyle } from './styles/global';
 
-function App() {
+import { AuthProvider } from "./contexts/Auth";
+import { CartProvider } from './contexts/Cart';
+import { ProductsProvider } from "./contexts/ProductsContext";
+
+export function App() {
   return (
-    <div className="App">
-      <GlobalStyles />
+    <>
+      <GlobalStyle />
       <AuthProvider>
-        <AppRoutes />
+        <ProductsProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </ProductsProvider>
       </AuthProvider>
-
-    </div>
+    </>
   );
 }
 
-export default App;

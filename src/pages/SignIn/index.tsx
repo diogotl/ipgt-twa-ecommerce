@@ -14,7 +14,7 @@ export function SignIn() {
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/dashboard')
+            navigate('/store')
         }
     }, [isAuth])
 
