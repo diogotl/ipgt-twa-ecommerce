@@ -32,7 +32,6 @@ export function Store() {
 
     const products = useContext(ProductsContext)
 
-
     function handleAddProduct(id: number) {
         addProduct(id);
     }

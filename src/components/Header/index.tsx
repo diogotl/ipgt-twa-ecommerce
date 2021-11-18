@@ -22,7 +22,7 @@ export function Header() {
 
         <Cart>
 
-          <HUE to="/cart">
+          <HUE to="/checkout">
             <HiOutlineShoppingCart size={24} color="#FFF" />
             <div>
               <strong>Meu carrinho</strong>
