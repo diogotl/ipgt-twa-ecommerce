@@ -9,14 +9,13 @@ import { Dashboard } from '../pages/Dashboard';
 
 export function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/sign" element={<Initial />} />
-        <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<SignIn />} />
+      <Route path="/store" element={<Store />} />
+      <Route path="/sign" element={<Initial />} />
+      <Route path="/checkout" element={<CheckOut />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
+
   );
 }

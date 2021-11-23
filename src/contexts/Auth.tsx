@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
 type User = {
@@ -26,6 +27,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const [user, setUser] = useState('')
     const [isAuth, setIsAuth] = useState(false)
+
+    let navigate = useNavigate();
 
     useEffect(() => {
 
@@ -63,7 +66,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             api.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
 
             setIsAuth(true)
-
 
         } catch (error) {
             console.log(error)

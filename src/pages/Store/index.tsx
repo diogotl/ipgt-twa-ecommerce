@@ -4,31 +4,24 @@ import { Container, ProductList } from "./styles";
 import { MdAddShoppingCart } from 'react-icons/md'
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/Cart";
+import { AuthContext } from "../../contexts/Auth";
+import { useNavigate } from "react-router";
 
 export function Store() {
 
-    // interface Product {
-    //     id: number;
-    //     categoria: string;
-    //     imagemUrl: string;
-    //     descricao: string;
-    //     nome: string;
-    //     preco: number;
-    // }
+    const { isAuth } = useContext(AuthContext)
 
-    // const [products, setProducts] = useState<Product[]>([]);
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        
+        if (!isAuth) {
+            navigate('/')
+        } 
+
+    }, [isAuth])
     
-    
-    // useEffect(() => {
-        //     async function getProducts() {
-            
-            //         const response = await api.get('/produto')
-            //         setProducts(response.data)
-            
-            //     }
-            //     getProducts();
-            // }, [])
-            
+
     const { addProduct, cart } = useContext(CartContext)
     
     const products = useContext(ProductsContext)
