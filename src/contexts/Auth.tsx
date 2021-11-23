@@ -67,6 +67,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setIsAuth(true)
 
+            return
+
         } catch (error) {
             console.log(error)
         }

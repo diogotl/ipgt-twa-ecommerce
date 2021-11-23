@@ -1,20 +1,41 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr,Text } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
+import { api } from "../../services/api";
+
+interface User {
+    nome: string;
+    password: string;
+    utilizador: string;
+}
 
 export function Dashboard() {
+
+    const [users, setUsers] = useState<User[]>([])
+
+    useEffect(() => {
+        async function getProducts() {
+
+            const { data } = await api.get('/conta')
+            setUsers(data)
+
+        }
+        getProducts();
+    }, [])
+
     return (
         <>
             <Header />
             <Box>
 
-                <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
-                   
+                <Flex w="100%" my="6" maxWidth={1180} mx="auto" px="6">
+
 
                     <Box flex="1" borderRadius={8} bg="gray.800" p="8">
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading size="lg" fontWeight="normal">
-                                Usuários
+                                Lista de utilizadores
                             </Heading>
 
                             <Link href="/users/create" passHref>
@@ -37,36 +58,29 @@ export function Dashboard() {
                                         <Checkbox colorScheme="pink" />
                                     </Th>
                                     <Th>Usuário</Th>
-                                    <Th>Data de cadastro</Th>
+                                    
                                     <Th width="6"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                <Tr>
-                                    <Td px={["2", "4", "6"]}>
-                                        <Checkbox colorScheme="pink" />
-                                    </Td>
-                                    <Td>
-                                        <Box>
-                                            <Text fontWeight="bold">Luan Lima</Text>
-                                            <Text fontSize="sm" color="gray.300">
-                                                luan@yata.dev
-                                            </Text>
-                                        </Box>
-                                    </Td>
-                                    <Td>19 de Abril, 2021</Td>
-                                    <Td>
-                                        <Button
-                                            as="a"
-                                            size="sm"
-                                            fontSize="sm"
-                                            colorScheme="purple"
-                                            leftIcon={<Icon as={RiPencilLine} />}
-                                        >
-                                            Editar
-                                        </Button>
-                                    </Td>
-                                </Tr>
+                                {users.map(user => {
+                                    return (
+                                        <Tr key={user.utilizador}>
+                                            <Td px={["4", "4", "6"]}>
+                                                <Checkbox colorScheme="pink" />
+                                            </Td>
+                                            <Td>
+                                                <Box>
+                                                    <Text fontWeight="bold">{user.nome}</Text>
+                                                    <Text fontWeight="sm" color="gray.300">{user.utilizador}</Text>
+                                                </Box>
+                                            </Td>
+                                            <Td>
+                                                <Button as="a" size="sm" fontSize="sm" colorScheme="red" leftIcon={<Icon as={RiPencilLine} fontSize="16" />}>Apagar</Button>
+                                            </Td>
+                                        </Tr>
+                                    )
+                                })}
                             </Tbody>
                         </Table>
 
