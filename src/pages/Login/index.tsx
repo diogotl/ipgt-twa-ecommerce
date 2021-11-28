@@ -1,21 +1,39 @@
-import { Grid, Heading } from "@chakra-ui/layout";
-import { Flex, Text } from "@chakra-ui/react";
+import { FormEvent, useContext, useState } from "react";
 
-import { useState } from "react";
+import { Divider, Grid, Heading, Link } from "@chakra-ui/layout";
+import { Flex, Input, Text, Stack, FormLabel, FormControl, Button } from "@chakra-ui/react";
+import { toast } from "react-toastify";
+
+import { AuthContext } from "../../contexts/Auth";
+
 import { Logo } from "../../components/Logo";
 
 export function Login() {
 
+    const { signIn, isAuth } = useContext(AuthContext)
+
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    async function handleLogin(event: FormEvent) {
 
+        event.preventDefault()
+
+        const data = {
+            username,
+            password
+        }
+
+        await signIn(data)
+        
+    }
 
 
     return (
         <Grid
             height="100vh"
-            templateColumns="1fr 480px 480px 1fr"
+            templateColumns="1fr 460px 460px 1fr"
             templateRows="1fr 480px 1fr"
             templateAreas="
                 '. . . .'
@@ -28,6 +46,8 @@ export function Login() {
             <Flex
                 gridArea="logo"
                 alignItems="flex-start"
+                h="60%"
+                mr="3rem"
             >
                 <Logo />
                 <Heading mt={20} size="xl" as="h2">
@@ -38,15 +58,54 @@ export function Login() {
                 </Heading>
             </Flex>
             <Flex
+                as="form"
                 gridArea="form"
                 h="100%"
-                bgColor="gray.400"
-                borderRadius="2xl"
+                bgColor="gray.800"
+                borderRadius="3xl"
                 flexDir="column"
                 alignItems="stretch"
-                padding={16}
+                padding="4rem"
+                onSubmit={handleLogin}
             >
-
+                <Stack spacing="1.4rem">
+                    <FormControl>
+                        <FormLabel htmlFor="username">Username</FormLabel>
+                        <Input
+                            size="lg"
+                            id="username"
+                            name="username"
+                            variant="filled"
+                            bgColor="gray.900"
+                            focusBorderColor="teal.300"
+                            borderRadius="md"
+                            _hover={{
+                                bgColor: "gray.900"
+                            }}
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="password">Password</FormLabel>
+                        <Input
+                            size="lg"
+                            id="password"
+                            name="password"
+                            type="password"
+                            variant="filled"
+                            bgColor="gray.900"
+                            focusBorderColor="teal.300"
+                            borderRadius="md"
+                            _hover={{
+                                bgColor: "gray.900"
+                            }}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </FormControl>
+                </Stack>
+                <Button size="lg" type="submit" mt="2rem" color="gray.900" bgColor="teal.400">Login</Button>
+                <Divider marginY="1.2rem" variant="dashed" />
+                <Text>Ainda não é cliente? <Link to="/dashboard" color="teal.400" fontWeight="bold">Registre-se</Link></Text>
             </Flex>
         </Grid>
     )

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 type User = {
@@ -67,10 +68,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setIsAuth(true)
 
-            return
+
 
         } catch (error) {
-            console.log(error)
+            
         }
 
     }
