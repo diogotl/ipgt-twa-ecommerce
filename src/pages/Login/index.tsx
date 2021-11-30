@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 
 import { Divider, Grid, Heading, Link } from "@chakra-ui/layout";
 import { Flex, Input, Text, Stack, FormLabel, FormControl, Button } from "@chakra-ui/react";
@@ -7,10 +7,24 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/Auth";
 
 import { Logo } from "../../components/Logo";
+import { useNavigate } from "react-router";
 
 export function Login() {
 
     const { signIn, isAuth } = useContext(AuthContext)
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if (isAuth) {
+            navigate('/store')
+        } else {
+            navigate('/')
+        }
+
+    }, [isAuth])
+
 
 
     const [username, setUsername] = useState('')
@@ -26,7 +40,7 @@ export function Login() {
         }
 
         await signIn(data)
-        
+
     }
 
 

@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
-interface Product {
+export interface Product {
     id: number;
     categoria: string;
     imagemUrl: string;

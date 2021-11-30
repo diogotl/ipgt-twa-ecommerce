@@ -9,22 +9,20 @@ import { useNavigate } from "react-router";
 
 export function Store() {
 
-    const { isAuth } = useContext(AuthContext)
+    let { isAuth } = useContext(AuthContext)
 
-    let navigate = useNavigate();
-
+    
     useEffect(() => {
-        
         if (!isAuth) {
             navigate('/')
-        } 
-
+        }   
     }, [isAuth])
     
-
-    const { addProduct, cart } = useContext(CartContext)
+    const navigate = useNavigate();
     
     const products = useContext(ProductsContext)
+    const { addProduct, cart } = useContext(CartContext)
+
 
     function handleAddProduct(id: number) {
         addProduct(id);

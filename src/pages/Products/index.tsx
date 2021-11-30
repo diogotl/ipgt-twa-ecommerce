@@ -1,29 +1,14 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { RiAddLine, RiPencilLine } from "react-icons/ri";
-import { Header } from "../../components/Header";
-import { SideNav } from "../../components/SideNav";
-import { api } from "../../services/api";
+import { Flex, Box, Heading, Link } from "@chakra-ui/layout"
+import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text } from "@chakra-ui/react"
+import { useContext } from "react"
+import { RiAddLine, RiPencilLine } from "react-icons/ri"
+import { SideNav } from "../../components/SideNav"
+import { ProductsContext, Product } from "../../contexts/ProductsContext"
 
-interface User {
-    nome: string;
-    password: string;
-    utilizador: string;
-}
 
-export function Dashboard() {
+export function Products() {
 
-    const [users, setUsers] = useState<User[]>([])
-
-    useEffect(() => {
-        async function getProducts() {
-
-            const { data } = await api.get('/conta')
-            setUsers(data)
-
-        }
-        getProducts();
-    }, [])
+    const products = useContext(ProductsContext)
 
     return (
         <Flex>
@@ -60,16 +45,16 @@ export function Dashboard() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {users.map(user => {
+                            {products.map(product => {
                                 return (
-                                    <Tr key={user.utilizador}>
+                                    <Tr key={product.id}>
                                         <Td px={["4", "4", "6"]}>
                                             <Checkbox colorScheme="pink" />
                                         </Td>
                                         <Td>
                                             <Box>
-                                                <Text fontWeight="bold">{user.nome}</Text>
-                                                <Text fontWeight="sm" color="gray.300">{user.utilizador}</Text>
+                                                <Text f="bold">{product.nome}</Text>
+                                                <Text fontWeight="sm" color="gray.300">{product.categoria}</Text>
                                             </Box>
                                         </Td>
                                         <Td>

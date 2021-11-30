@@ -17,7 +17,6 @@ export function SignIn() {
     useEffect(() => {
         
         if (isAuth) {
-            console.log('nei')
             navigate('/store')
         } else {
             navigate('/')

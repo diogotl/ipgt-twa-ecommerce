@@ -59,7 +59,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const { token } = response.data;
 
             setUser(username)
-            console.log(user + 'aqui')
 
             localStorage.setItem('@Username', username)
             localStorage.setItem('@Token', token)
@@ -68,7 +67,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setIsAuth(true)
 
-
+            navigate("/store")
 
         } catch (error) {
             
