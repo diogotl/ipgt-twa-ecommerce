@@ -70,7 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             navigate("/store")
 
         } catch (error) {
-            
+            toast.error('Combinação username/password errada')
         }
 
     }

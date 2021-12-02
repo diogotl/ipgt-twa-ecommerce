@@ -1,14 +1,16 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
-export interface Product {
+interface Product {
     id: number;
     categoria: string;
     imagemUrl: string;
     descricao: string;
     nome: string;
     preco: number;
+    quantidade: number;
 }
+
 
 interface ProductsProviderProps {
     children: ReactNode;

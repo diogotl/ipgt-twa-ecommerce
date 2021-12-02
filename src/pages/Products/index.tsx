@@ -3,7 +3,7 @@ import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text } from "@
 import { useContext } from "react"
 import { RiAddLine, RiPencilLine } from "react-icons/ri"
 import { SideNav } from "../../components/SideNav"
-import { ProductsContext, Product } from "../../contexts/ProductsContext"
+import { ProductsContext } from "../../contexts/ProductsContext"
 
 
 export function Products() {

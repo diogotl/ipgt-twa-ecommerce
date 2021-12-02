@@ -3,24 +3,25 @@ import { Header } from "../../components/Header";
 import { Container, ProductList } from "./styles";
 import { MdAddShoppingCart } from 'react-icons/md'
 import { ProductsContext } from "../../contexts/ProductsContext";
-import { CartContext } from "../../contexts/Cart";
+import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router";
 
 export function Store() {
 
-    let { isAuth } = useContext(AuthContext)
+    const { isAuth } = useContext(AuthContext)
+    const navigate = useNavigate();
 
-    
+
     useEffect(() => {
         if (!isAuth) {
             navigate('/')
-        }   
+        }
     }, [isAuth])
-    
-    const navigate = useNavigate();
-    
+
+
     const products = useContext(ProductsContext)
+    
     const { addProduct, cart } = useContext(CartContext)
 
 
@@ -44,9 +45,9 @@ export function Store() {
                                 type="button"
                                 onClick={() => handleAddProduct(product.id)}
                             >
-                                <div data-testid="cart-product-quantity">
+                                <div>
                                     <MdAddShoppingCart size={16} color="#FFF" />
-                                    {/* {cartItemsAmount[product.id] || 0} */}
+
                                 </div>
 
                                 <span>Adicionar ao carrinho</span>

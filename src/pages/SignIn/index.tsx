@@ -12,7 +12,7 @@ export function SignIn() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         

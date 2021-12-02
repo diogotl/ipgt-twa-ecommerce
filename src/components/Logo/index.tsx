@@ -3,12 +3,12 @@ import { Text } from '@chakra-ui/react'
 export function Logo() {
   return (
     <Text
-      fontSize={['2xl', '3xl']}
+      fontSize='5xl'
       fontWeight='bold'
       letterSpacing='tight'
     >
-      whisla
-      <Text as='span' color='pink.500' ml='1'>.</Text>
+      wh
+      <Text as='span' color='cyan.300'>isla</Text>
     </Text>
   )
 }

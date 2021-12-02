@@ -12,9 +12,8 @@ import { useNavigate } from "react-router";
 export function Login() {
 
     const { signIn, isAuth } = useContext(AuthContext)
-
     const navigate = useNavigate();
-
+    
     useEffect(() => {
 
         if (isAuth) {
@@ -24,7 +23,6 @@ export function Login() {
         }
 
     }, [isAuth])
-
 
 
     const [username, setUsername] = useState('')
@@ -40,7 +38,6 @@ export function Login() {
         }
 
         await signIn(data)
-
     }
 
 
@@ -48,7 +45,7 @@ export function Login() {
         <Grid
             height="100vh"
             templateColumns="1fr 460px 460px 1fr"
-            templateRows="1fr 480px 1fr"
+            templateRows="1fr 460px 1fr"
             templateAreas="
                 '. . . .'
                 '. logo form .'
@@ -61,14 +58,11 @@ export function Login() {
                 gridArea="logo"
                 alignItems="flex-start"
                 h="60%"
-                mr="3rem"
+                mr="2.2rem"
             >
                 <Logo />
-                <Heading mt={20} size="xl" as="h2">
-                    WELCOME BACK, UP TO <Text as='span' color='pink.500' ml='1'>30</Text>% OFF!
-                    <Text>
-                        sdssdaasd
-                    </Text>
+                <Heading mt={24} size="xl" as="div">
+                    WELCOME BACK, UP TO <Text as='span' color='teal.300' ml='1'>30</Text>% OFF<Text as='span' color='teal.300' ml='1'>!</Text>
                 </Heading>
             </Flex>
             <Flex
