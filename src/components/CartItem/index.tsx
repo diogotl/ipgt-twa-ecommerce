@@ -1,5 +1,10 @@
-import { CloseButton, Flex, Select, SelectProps, Link, useColorModeValue, Text } from '@chakra-ui/react'
+import { Flex, Select, SelectProps, useColorModeValue, Text, Button, Stack, IconButton } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { FiPlusCircle } from 'react-icons/fi'
+import {IoIosArrowUp} from 'react-icons/io'
+import { CartContext } from '../../contexts/CartContext'
 import { CartProductMeta } from '../CartMeta'
+
 
 type CartItemProps = {
     id: number;
@@ -11,7 +16,7 @@ type CartItemProps = {
     quantidade: number;
     onChangeQuantity?: (quantity: number) => void
     //onClickGiftWrapping?: () => void
-    onClickDelete?: () => void
+    //onClickDelete?: () => void
 }
 
 const QuantitySelect = (props: SelectProps) => {
@@ -30,7 +35,10 @@ const QuantitySelect = (props: SelectProps) => {
     )
 }
 
-export function CartItem({ id, nome, categoria, descricao, imagemUrl, preco, quantidade, onChangeQuantity, onClickDelete }: CartItemProps) {
+
+export function CartItem({ id, nome, categoria, descricao, imagemUrl, preco, quantidade, onChangeQuantity }: CartItemProps) {
+
+    const { removeProduct } = useContext(CartContext)
 
     return (
         <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
@@ -38,39 +46,25 @@ export function CartItem({ id, nome, categoria, descricao, imagemUrl, preco, qua
                 name={nome}
                 description={descricao}
                 image={imagemUrl}
-            //isGiftWrapping={isGiftWrapping}
+                categoria={categoria}
             />
 
-            {/* Desktop */}
-            <Flex width="full" justify="space-between" display={{ base: 'none', md: 'flex' }}>
-                <QuantitySelect
-                    value={quantidade}
-                    onChange={(e) => {
-                        onChangeQuantity?.(+e.currentTarget.value)
-                    }}
-                />
-                <Text>{preco}</Text>
-                <CloseButton aria-label={`Delete ${nome} from cart`} onClick={onClickDelete} />
-            </Flex>
+            <Flex width="full" justify="space-between" align="center">
+                <Stack spacing={4} direction='row' align='center'>
 
-            {/* Mobile */}
-            <Flex
-                mt="4"
-                align="center"
-                width="full"
-                justify="space-between"
-                display={{ base: 'flex', md: 'none' }}
-            >
-                <Link fontSize="sm" textDecor="underline">
-                    Delete
-                </Link>
-                <QuantitySelect
-                    value={quantidade}
-                    onChange={(e) => {
-                        onChangeQuantity?.(+e.currentTarget.value)
-                    }}
-                />
+                    <IconButton aria-label="aumentar" variant='ghost' color="cyan.300" icon={<FiPlusCircle />} />
+
+                    <QuantitySelect
+                        value={quantidade}
+                        onChange={(e) => {
+                            onChangeQuantity?.(+e.currentTarget.value)
+                        }}
+                    />
+
+                    <IconButton aria-label="aumentar" variant='ghost' color="cyan.300" icon={<IoIosArrowUp />} />
+                </Stack>
                 <Text>{preco}</Text>
+                <Button aria-label={`Delete ${nome} from cart`} onClick={() => removeProduct(id)} />
             </Flex>
         </Flex>
     )

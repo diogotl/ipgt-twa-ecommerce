@@ -3,19 +3,19 @@ import {
     Flex,
     Heading,
     HStack,
-    Link,
     Stack,
-    useColorModeValue as mode,
+    Text
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { CartItem } from '../../components/CartItem'
 import { CartOrder } from '../../components/CartOrder'
-import { ProductsContext } from '../../contexts/ProductsContext'
+import { CartContext } from '../../contexts/CartContext'
 
 
 export function CheckOut() {
 
-    const products = useContext(ProductsContext)
+    const { cart } = useContext(CartContext)
 
     return (
         <Box
@@ -35,8 +35,8 @@ export function CheckOut() {
                     </Heading>
 
                     <Stack spacing="6">
-                        {products.map((product) => (
-                            <CartItem key={product.id} {...product} />
+                        {cart.map((produto) => (
+                            <CartItem key={produto.id} {...produto} />
                         ))}
                     </Stack>
                 </Stack>
@@ -44,8 +44,12 @@ export function CheckOut() {
                 <Flex direction="column" align="center" flex="1">
                     <CartOrder />
                     <HStack mt="6" fontWeight="semibold">
-                        <p>or</p>
-                        <Link color={mode('blue.500', 'blue.200')}>Continue shopping</Link>
+                        <p>ou</p>
+                        <Link to="/store">
+                            <Text color='cyan.300'>
+                                Volte para a loja
+                            </Text>
+                        </Link>
                     </HStack>
                 </Flex>
             </Stack>

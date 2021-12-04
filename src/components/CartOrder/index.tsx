@@ -9,7 +9,6 @@ import {
   } from '@chakra-ui/react'
   import * as React from 'react'
   import { FaArrowRight } from 'react-icons/fa'
-  //import { formatPrice } from './PriceTag'
   
   type OrderSummaryItemProps = {
     label: string
@@ -31,8 +30,8 @@ import {
   
   export const CartOrder = () => {
     return (
-      <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
-        <Heading size="md">Order Summary</Heading>
+      <Stack spacing="8" borderWidth="2px" rounded="lg" padding="10" width="full" bg="gray.900">
+        <Heading size="md">Encomenda</Heading>
   
         <Stack spacing="6">
           <OrderSummaryItem label="Subtotal" value={597} />
@@ -55,8 +54,8 @@ import {
             </Text>
           </Flex>
         </Stack>
-        <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
-          Checkout
+        <Button colorScheme="cyan" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
+          Comprar
         </Button>
       </Stack>
     )

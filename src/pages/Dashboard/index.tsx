@@ -63,7 +63,7 @@ export function Dashboard() {
                             {users.map(user => {
                                 return (
                                     <Tr key={user.utilizador}>
-                                        <Td px={["4", "4", "6"]}>
+                                        <Td px={["4", "6"]}>
                                             <Checkbox colorScheme="pink" />
                                         </Td>
                                         <Td>

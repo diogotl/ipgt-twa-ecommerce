@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
+import { ProductsContext } from './ProductsContext';
 
 interface Product {
     id: number;
@@ -21,7 +22,7 @@ interface CartProviderProps {
 }
 
 interface CartContextData {
-    cart: Linha[];
+    cart: Product[];
     addProduct: (id: number) => void;
     removeProduct: (id: number) => void;
     //updateProductQuantity: ({ id, amount }: UpdateProductAmount) => void;
@@ -31,38 +32,43 @@ export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
 
-    const [cart, setCart] = useState<Linha[]>([]);
+    const products = useContext(ProductsContext)
+
+    const [cart, setCart] = useState<Product[]>([]);
+
 
     function addProduct(id: number) {
         try {
+            const productExists = products.find(products => products.id === id);
 
-            const updatedCart = [...cart];
-            const productExists = updatedCart.find(produto => produto.produtoId === id);
+            if (!productExists) {
+                return toast.error('Produto não disponivel')
+            }
 
-            if(productExists) {
-                return toast.error('O produto já se encontra no carrinho')
+            const productAlreadyInCart = cart.find(products => products.id === productExists.id);
+
+            if (productAlreadyInCart) {
+                return toast.error(`O produto ${productAlreadyInCart.nome} já existe no carrinho`)
             }
 
             const product = {
-                produtoId: id,
+                ...productExists,
                 quantidade: 1
             }
 
             setCart([...cart, product]);
-
-            console.log(cart)
         } catch {
-            // TODO
+            return toast.error(`Erro, por favor tente mais tarde`)
         }
     };
 
-    const removeProduct = (id: number) => {
+    function removeProduct(id: number) {
         try {
-            const updatedCart = cart.filter(produto => produto.produtoId === id)
+            const updatedCart = cart.filter(produto => produto.id !== id)
             setCart(updatedCart)
             localStorage.setItem('@Cart', JSON.stringify(updatedCart))
         } catch {
-            toast.error('sadsadsadasdsa')
+            toast.error('Erro ao remover produto')
         }
     };
 
