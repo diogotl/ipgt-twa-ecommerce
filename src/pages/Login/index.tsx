@@ -40,7 +40,6 @@ export function Login() {
         await signIn(data)
     }
 
-
     return (
         <Grid
             height="100vh"
@@ -70,7 +69,7 @@ export function Login() {
                 gridArea="form"
                 h="100%"
                 bgColor="gray.800"
-                borderRadius="3xl"
+                borderRadius="lg"
                 flexDir="column"
                 alignItems="stretch"
                 padding="4rem"

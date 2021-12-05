@@ -1,24 +1,20 @@
 import {
+  Badge,
   Box,
-  HStack,
-  Icon,
   Image,
-  Link,
   Stack,
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react'
-import { FiGift } from 'react-icons/fi'
 
-export type CartProductMetaProps = {
-  name: string
-  description: string
-  image: string
+interface CartProductProps {
+  nome: string
+  imagemURL: string
   categoria: string
 }
 
-export const CartProductMeta = (props: CartProductMetaProps) => {
-  const { image, name, description,categoria } = props
+export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps) => {
+  //const { image, nome, description, categoria } = props
   return (
     <Stack direction="row" spacing="5" width="full">
       <Image
@@ -26,19 +22,18 @@ export const CartProductMeta = (props: CartProductMetaProps) => {
         width="120px"
         height="120px"
         fit="cover"
-        src={image}
-        alt={name}
+        src={imagemURL}
+        alt={nome}
         draggable="false"
-        loading="lazy"
+      //loading="lazy"
       />
       <Box pt="4">
         <Stack spacing="0.5">
-          <Text fontWeight="medium">{name}</Text>
-          <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
-            {description}
-          </Text>
+          <Text fontWeight="medium">{nome}</Text>
         </Stack>
-        <Text color="cyan.400">{categoria}</Text>
+        <Badge variant='subtle' colorScheme='cyan'>
+          {categoria}
+        </Badge>
       </Box>
     </Stack>
   )

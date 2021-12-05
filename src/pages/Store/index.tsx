@@ -7,6 +7,8 @@ import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router";
 
+
+
 export function Store() {
 
     const { isAuth } = useContext(AuthContext)
@@ -21,9 +23,8 @@ export function Store() {
 
 
     const products = useContext(ProductsContext)
-    
-    const { addProduct, cart } = useContext(CartContext)
 
+    const { addProduct, updateProductQuantity } = useContext(CartContext)
 
     function handleAddProduct(id: number) {
         addProduct(id);
@@ -33,7 +34,6 @@ export function Store() {
         <>
             <Header />
             <Container>
-
                 <ProductList>
                     {products.map(product => (
                         <li key={product.id}>

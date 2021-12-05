@@ -7,12 +7,19 @@ type User = {
     username: string
 }
 
-type SignInData = {
+interface SignInData {
+    username: string;
+    password: string;
+}
+
+interface SignUpData {
+    nome: string;
     username: string;
     password: string;
 }
 
 type AuthContextData = {
+    signUp(data: SignUpData): Promise<void>
     signIn(data: SignInData): Promise<void>
     isAuth: boolean;
     user: any
@@ -29,7 +36,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState('')
     const [isAuth, setIsAuth] = useState(false)
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -45,7 +52,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
         loadUser()
     }, [])
-    
 
     async function signIn({ username, password }: SignInData) {
 
@@ -72,12 +78,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
         } catch (error) {
             toast.error('Combinação username/password errada')
         }
+    }
 
+    async function signUp({ nome, username, password }: SignUpData) {
+
+        try {
+
+            const response = await api.post('/conta/registar', {
+                nome,
+                username,
+                password
+            }).catch(erro => (
+                toast.error(`${erro}`)
+            ))
+
+            navigate("/login")
+
+        } catch (error) {
+            toast.error('A sua conta já está registada')
+        }
     }
 
 
+
     return (
-        <AuthContext.Provider value={{ signIn, isAuth, user }}>
+        <AuthContext.Provider value={{ signIn, signUp,isAuth, user }}>
             {children}
         </AuthContext.Provider>
     )

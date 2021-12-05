@@ -17,6 +17,12 @@ interface Linha {
     quantidade: number
 }
 
+interface UpdateProductAmount {
+    id: number;
+    quantidade: number;
+}
+
+
 interface CartProviderProps {
     children: ReactNode
 }
@@ -25,7 +31,7 @@ interface CartContextData {
     cart: Product[];
     addProduct: (id: number) => void;
     removeProduct: (id: number) => void;
-    //updateProductQuantity: ({ id, amount }: UpdateProductAmount) => void;
+    updateProductQuantity: ({ id, quantidade }: UpdateProductAmount) => void;
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -72,9 +78,42 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     };
 
+    function updateProductQuantity ({
+        id,
+        quantidade,
+    }: UpdateProductAmount) {
+        try {
+            if (quantidade <= 0) {
+                return;
+            }
+
+            //const stock = await api.get(`/stock/${productId}`);
+
+            // const stockAmount = stock.data.amount;
+
+            // if (amount > stockAmount) {
+            //     toast.error('Quantidade solicitada fora de estoque');
+            //     return;
+            // }
+
+            const updatedCart = [...cart];
+            const productExists = updatedCart.find(product => product.id === id);
+
+            if (productExists) {
+                productExists.quantidade = quantidade;
+                setCart(updatedCart);
+            } else {
+                toast.error('Erro na alteração de quantidade do produto');
+            }
+        } catch {
+            toast.error('Erro na alteração de quantidade do produto');
+        }
+    };
+
+
     return (
         <CartContext.Provider
-            value={{ cart, addProduct, removeProduct }}
+            value={{ cart, addProduct, removeProduct, updateProductQuantity }}
         >
             {children}
         </CartContext.Provider>
