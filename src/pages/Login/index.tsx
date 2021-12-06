@@ -1,7 +1,9 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 
 import { Divider, Grid, Heading, Link } from "@chakra-ui/layout";
-import { Flex, Input, Text, Stack, FormLabel, FormControl, Button } from "@chakra-ui/react";
+import { Flex, Text, Stack, FormLabel, FormControl, Button } from "@chakra-ui/react";
+
+import { Input } from '../../components/Form/Input'
 import { toast } from "react-toastify";
 
 import { AuthContext } from "../../contexts/Auth";
@@ -13,7 +15,7 @@ export function Login() {
 
     const { signIn, isAuth } = useContext(AuthContext)
     const navigate = useNavigate();
-    
+
     useEffect(() => {
 
         if (isAuth) {
@@ -76,7 +78,8 @@ export function Login() {
                 onSubmit={handleLogin}
             >
                 <Stack spacing="1.4rem">
-                    <FormControl>
+                    <Input name="username" label="Username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                    {/* <FormControl>
                         <FormLabel htmlFor="username">Username</FormLabel>
                         <Input
                             size="lg"
@@ -91,7 +94,7 @@ export function Login() {
                             }}
                             onChange={e => setUsername(e.target.value)}
                         />
-                    </FormControl>
+                    </FormControl> */}
                     <FormControl>
                         <FormLabel htmlFor="password">Password</FormLabel>
                         <Input

@@ -8,3 +8,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//https://react-icons.github.io/react-icons/icons?name=vsc

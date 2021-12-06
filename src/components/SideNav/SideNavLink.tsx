@@ -8,7 +8,6 @@ interface SideNavLink extends LinkProps {
     children: string;
 }
 
-
 export function SideNavLink({ icon, to, children, ...rest }: SideNavLink) {
     return (
         <ActiveLink to={to}>

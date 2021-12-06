@@ -34,7 +34,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
 
 
     return (
-        <ProductsContext.Provider value={products}>
+        <ProductsContext.Provider value={products} >
             {children}
         </ProductsContext.Provider>
     )

@@ -1,8 +1,10 @@
 import { FormLabel } from '@chakra-ui/react';
 import { FormEvent, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth';
-import { Flex, Input, Button, Stack, FormControl } from '@chakra-ui/react'
+import { Flex, Button, Stack, FormControl } from '@chakra-ui/react'
+
+import { Input } from '../../components/Form/Input';
 
 
 export function SignIn() {
@@ -15,7 +17,7 @@ export function SignIn() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+
         if (isAuth) {
             navigate('/store')
         } else {
@@ -37,18 +39,21 @@ export function SignIn() {
 
         await signIn(data)
 
-        navigate('/store')
+        return (
+            <Link to="/store"></Link>
+        )
     }
 
     return (
         <Flex w="100vw" h="100vh" align="center" justify="center">
             <Flex as="form" w="100%" maxWidth={360} bgColor="gray.300" p="8" borderRadius={8} flexDir="column" onSubmit={handleSubmit}>
                 <Stack spacing="4">
-                    <FormControl>
+                    <Input name="username" label="Username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                    {/* <FormControl>
                         <FormLabel htmlFor="email">Username</FormLabel>
                         <Input name="email" id="email" type="text" focusBorderColor="blue" bg="gray.700" value={username} onChange={e => setUsername(e.target.value)} />
 
-                    </FormControl>
+                    </FormControl> */}
                     <FormControl>
                         <FormLabel htmlFor="password">Password </FormLabel>
                         <Input name="password" id="password" type="password" focusBorderColor="blue" bg="gray.700" value={password} onChange={e => setPassword(e.target.value)} />

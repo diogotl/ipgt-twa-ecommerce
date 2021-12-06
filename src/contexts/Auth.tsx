@@ -92,7 +92,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 toast.error(`${erro}`)
             ))
 
-            navigate("/login")
+            //navigate("/login")
 
         } catch (error) {
             toast.error('A sua conta já está registada')

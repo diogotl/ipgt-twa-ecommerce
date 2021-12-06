@@ -8,8 +8,8 @@ interface ActiveLinkProps extends LinkProps {
 
 export function ActiveLink({ children, to, ...props }: ActiveLinkProps) {
 
-  let resolved = useResolvedPath(to);
-  let match = useMatch({ path: resolved.pathname, end: true });
+  const resolved = useResolvedPath(to);
+  const match = useMatch({ path: resolved.pathname, end: true });
 
   return (
     <Link style={{ color: match ? '#4FD1C5' : undefined }} to={to} {...props}>
