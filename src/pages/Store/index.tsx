@@ -22,7 +22,7 @@ export function Store() {
     }, [isAuth])
 
 
-    const products = useContext(ProductsContext)
+    const { products } = useContext(ProductsContext)
 
     const { addProduct, updateProductQuantity } = useContext(CartContext)
 

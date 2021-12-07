@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 interface Product {
@@ -8,15 +9,20 @@ interface Product {
     descricao: string;
     nome: string;
     preco: number;
-    quantidade: number;
+    quantidade?: number;
 }
-
 
 interface ProductsProviderProps {
     children: ReactNode;
 }
 
-export const ProductsContext = createContext<Product[]>([])
+interface CartContextData {
+    products: Product[];
+    createProduct(data: Product): Promise<void>;
+    deleteProduct(id: number): Promise<void>;
+}
+
+export const ProductsContext = createContext<CartContextData>({} as CartContextData);
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
 
@@ -30,13 +36,67 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
 
         }
         getProducts();
-    }, [])
+    }, [products])
+
+    async function createProduct({ id, preco, nome, categoria, imagemUrl, descricao }: Product) {
+
+        try {
+            await api.post('/produto', {
+                id,
+                preco,
+                nome,
+                categoria,
+                imagemUrl,
+                descricao
+            })
+
+
+
+        } catch (error) {
+            toast.error(`${error}`)
+        }
+    }
+
+    async function deleteProduct(id: number) {
+
+        try {
+            await api.delete(`/produto/${id}`)
+
+        } catch (error) {
+            toast.error(`${error}`)
+        }
+    }
 
 
     return (
-        <ProductsContext.Provider value={products} >
+        <ProductsContext.Provider value={{ products, createProduct, deleteProduct }} >
             {children}
         </ProductsContext.Provider>
     )
 
 }
+
+// export const ProductsHandleContext = createContext<CartContextData>({} as CartContextData);
+
+// export function ProductsHandleProvider({ children }: ProductsProviderProps) {
+
+//     const [products, setProducts] = useState<Product[]>([]);
+
+//     useEffect(() => {
+//         async function getProducts() {
+
+//             const response = await api.get('/produto')
+//             setProducts(response.data)
+
+//         }
+//         getProducts();
+//     }, [])
+
+
+//     return (
+//         <ProductsContext.Provider value={products} >
+//             {children}
+//         </ProductsContext.Provider>
+//     )
+
+// }

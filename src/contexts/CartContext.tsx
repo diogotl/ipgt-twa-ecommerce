@@ -12,10 +12,10 @@ interface Product {
     quantidade: number;
 }
 
-interface Linha {
-    produtoId: number,
-    quantidade: number
-}
+// interface Linha {
+//     produtoId: number,
+//     quantidade: number
+// }
 
 interface UpdateProductAmount {
     id: number;
@@ -38,10 +38,9 @@ export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
 
-    const products = useContext(ProductsContext)
+    const { products } = useContext(ProductsContext)
 
     const [cart, setCart] = useState<Product[]>([]);
-
 
     function addProduct(id: number) {
         try {
@@ -78,7 +77,7 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     };
 
-    function updateProductQuantity ({
+    function updateProductQuantity({
         id,
         quantidade,
     }: UpdateProductAmount) {

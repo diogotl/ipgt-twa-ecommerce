@@ -18,7 +18,7 @@ interface SignUpData {
     password: string;
 }
 
-type AuthContextData = {
+interface AuthContextData {
     signUp(data: SignUpData): Promise<void>
     signIn(data: SignInData): Promise<void>
     isAuth: boolean;
@@ -98,8 +98,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             toast.error('A sua conta já está registada')
         }
     }
-
-
 
     return (
         <AuthContext.Provider value={{ signIn, signUp,isAuth, user }}>

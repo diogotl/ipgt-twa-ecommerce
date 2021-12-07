@@ -12,12 +12,12 @@ import { CartItem } from '../../components/CartItem'
 import { CartOrder } from '../../components/CartOrder'
 import { CartContext } from '../../contexts/CartContext'
 
-
 export function CheckOut() {
 
     const { cart } = useContext(CartContext)
 
     return (
+
         <Box
             maxW={{ base: '3xl', lg: '7xl' }}
             mx="auto"

@@ -9,7 +9,7 @@ import { VscEdit } from "react-icons/vsc";
 
 export function Products() {
 
-    const products = useContext(ProductsContext)
+    const { products, deleteProduct } = useContext(ProductsContext)
 
     return (
         <>
@@ -64,7 +64,7 @@ export function Products() {
                                                 <Stack direction="row">
 
                                                     <Button as="a" size="sm" fontSize="sm" colorScheme="yellow" leftIcon={<Icon as={VscEdit} fontSize="16" />}>Editar</Button>
-                                                    <Button as="a" size="sm" fontSize="sm" colorScheme="red" leftIcon={<Icon as={RiPencilLine} fontSize="16" />}>Apagar</Button>
+                                                    <Button as="a" size="sm" fontSize="sm" colorScheme="red" leftIcon={<Icon as={RiPencilLine} fontSize="16" />} onClick={() => deleteProduct(product.id)}>Apagar</Button>
                                                 </Stack>
                                             </Td>
                                         </Tr>
