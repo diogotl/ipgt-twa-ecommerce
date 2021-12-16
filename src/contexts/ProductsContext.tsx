@@ -73,30 +73,4 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
             {children}
         </ProductsContext.Provider>
     )
-
 }
-
-// export const ProductsHandleContext = createContext<CartContextData>({} as CartContextData);
-
-// export function ProductsHandleProvider({ children }: ProductsProviderProps) {
-
-//     const [products, setProducts] = useState<Product[]>([]);
-
-//     useEffect(() => {
-//         async function getProducts() {
-
-//             const response = await api.get('/produto')
-//             setProducts(response.data)
-
-//         }
-//         getProducts();
-//     }, [])
-
-
-//     return (
-//         <ProductsContext.Provider value={products} >
-//             {children}
-//         </ProductsContext.Provider>
-//     )
-
-// }

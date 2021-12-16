@@ -6,6 +6,7 @@ import { ProductsContext } from "../../contexts/ProductsContext";
 import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router";
+import { Filter } from "../../components/Products/Filter";
 
 
 
@@ -24,7 +25,7 @@ export function Store() {
 
     const { products } = useContext(ProductsContext)
 
-    const { addProduct, updateProductQuantity } = useContext(CartContext)
+    const { addProduct } = useContext(CartContext)
 
     function handleAddProduct(id: number) {
         addProduct(id);
@@ -33,6 +34,7 @@ export function Store() {
     return (
         <>
             <Header />
+            <Filter/>
             <Container>
                 <ProductList>
                     {products.map(product => (

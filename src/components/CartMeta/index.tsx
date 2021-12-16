@@ -4,7 +4,6 @@ import {
   Image,
   Stack,
   Text,
-  useColorModeValue as mode,
 } from '@chakra-ui/react'
 
 interface CartProductProps {
@@ -14,7 +13,7 @@ interface CartProductProps {
 }
 
 export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps) => {
-  //const { image, nome, description, categoria } = props
+
   return (
     <Stack direction="row" spacing="5" width="full">
       <Image
@@ -25,7 +24,6 @@ export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps
         src={imagemURL}
         alt={nome}
         draggable="false"
-      //loading="lazy"
       />
       <Box pt="4">
         <Stack spacing="0.5">
