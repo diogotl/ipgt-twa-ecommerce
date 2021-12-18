@@ -15,18 +15,18 @@ interface CartProductProps {
 export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps) => {
 
   return (
-    <Stack direction="row" spacing="5" width="full">
+    <Stack direction="row" spacing="8" width="full">
       <Image
-        rounded="lg"
-        width="120px"
-        height="120px"
-        fit="cover"
+        rounded="2xl"
+        width="200px"
+        height="100px"
+        fit="fill"
         src={imagemURL}
         alt={nome}
         draggable="false"
       />
       <Box pt="4">
-        <Stack spacing="0.5">
+        <Stack spacing="1rem">
           <Text fontWeight="medium">{nome}</Text>
         </Stack>
         <Badge variant='subtle' colorScheme='cyan'>

@@ -2,6 +2,8 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 
+//#region 
+
 interface Product {
     id: number;
     categoria: string;
@@ -21,6 +23,7 @@ interface CartContextData {
     createProduct(data: Product): Promise<void>;
     deleteProduct(id: number): Promise<void>;
 }
+//#endregion
 
 export const ProductsContext = createContext<CartContextData>({} as CartContextData);
 
@@ -30,10 +33,8 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
 
     useEffect(() => {
         async function getProducts() {
-
             const response = await api.get('/produto')
             setProducts(response.data)
-
         }
         getProducts();
     }, [products])
@@ -66,7 +67,6 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
             toast.error(`${error}`)
         }
     }
-
 
     return (
         <ProductsContext.Provider value={{ products, createProduct, deleteProduct }} >

@@ -1,8 +1,8 @@
 import { Flex, Text, Stack, IconButton } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp } from 'react-icons/io5'
-import { CartContext } from '../../contexts/CartContext'
-import { CartProductMeta } from '../CartMeta'
+import { CartContext } from '../../../contexts/CartContext'
+import { CartProductMeta } from '../../CartMeta'
 
 
 interface Product {

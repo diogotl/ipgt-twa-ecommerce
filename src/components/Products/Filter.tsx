@@ -1,17 +1,23 @@
-import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text, Flex, Stack, Select, Input } from "@chakra-ui/react"
+import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text, Flex, Stack, Select, Input, HStack } from "@chakra-ui/react"
+import { useState } from "react"
 
 export function Filter() {
+
+    const [searchByName, setSearchByName] = useState('')
+
+    
+
     return (
-        <Flex w="100%" my="10" maxW="1280px" mx="auto" px="10" >
-            <Stack spacing={8} flexDirection="row">
-                <Input as="input" display="inline" colorScheme="cyan" placeholder='Basic usage' />
-                <Select as="select" display="inline" colorScheme="facebook" placeholder='Select option'>
+        <Flex w="100%" my="10" maxW="1280px" mx="auto" px="10" bgColor="gray.800" padding="2rem" borderRadius="xl">
+            <HStack spacing={8} flexDirection="row" alignItems="flex-end">
+                <Input as="input" colorScheme="teal" placeholder='Basic usage' onChange={event => setSearchByName(event.target.value)} />
+                <Select as="select" colorScheme="teal" placeholder='Select option'>
                     <option value='option1'>Option 1</option>
                     <option value='option2'>Option 2</option>
                     <option value='option3'>Option 3</option>
                 </Select>
 
-            </Stack>
+            </HStack>
         </Flex>
     )
 

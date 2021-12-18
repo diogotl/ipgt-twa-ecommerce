@@ -13,7 +13,7 @@ export function Header() {
   const { user } = useContext(AuthContext)
 
   return (
-    <Flex as="header" w="100%" h="4rem" mt="2rem" mx="auto" px="6" align="center" maxWidth={1280}>
+    <Flex as="header" w="100%" h="5rem" mt="2rem" mx="auto" px="6" align="center" maxWidth={1480}>
       <Link to="/">
         <Logo />
       </Link>
@@ -23,12 +23,11 @@ export function Header() {
         align="center"
       >
         <HStack spacing="1rem">
-          <ActiveLink to="/dashboard" children={<Icon fontSize="20" as={RiAdminLine} />} />
+          <ActiveLink to="/dashboard/products" children={<Icon fontSize="20" as={RiAdminLine} />} />
           <ActiveLink to="/checkout" children={<Icon fontSize="20" as={HiOutlineShoppingCart} />} />
         </HStack>
 
         <Flex align='center' ml="3rem">
-
           <Box
             mr="1rem"
             textAlign='right'

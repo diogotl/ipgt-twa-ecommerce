@@ -1,20 +1,16 @@
 import {
     Box,
     Flex,
-    Heading,
     HStack,
-    Icon,
     Stack,
     Text
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import { CartItem } from '../../components/CartItem'
+import { CartItem } from '../../components/Cart/CartItem'
 import { CartOrder } from '../../components/CartOrder'
 import { CartContext } from '../../contexts/CartContext'
 import { Header } from '../../components/Header'
-import { MdAddShoppingCart } from 'react-icons/md'
-import { FaSadCry } from 'react-icons/fa'
 
 export function CheckOut() {
 

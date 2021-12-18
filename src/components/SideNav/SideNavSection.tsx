@@ -1,5 +1,5 @@
-import { Box, Stack, Link, Icon, Text } from "@chakra-ui/react"
-import React, { ReactNode } from "react"
+import { Box, Stack, Text } from "@chakra-ui/react"
+import { ReactNode } from "react"
 
 interface SideNavSectionProps {
     title: string;

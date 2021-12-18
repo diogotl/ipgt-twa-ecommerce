@@ -1,20 +1,16 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { Header } from "../../components/Header";
 import { Container, ProductList } from "./styles";
-import { MdAddShoppingCart } from 'react-icons/md'
 import { ProductsContext } from "../../contexts/ProductsContext";
-import { CartContext } from "../../contexts/CartContext";
 import { AuthContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router";
 import { Filter } from "../../components/Products/Filter";
-
-
+import { ProductItem } from "../../components/Products/ProductItem";
 
 export function Store() {
 
     const { isAuth } = useContext(AuthContext)
     const navigate = useNavigate();
-
 
     useEffect(() => {
         if (!isAuth) {
@@ -22,14 +18,10 @@ export function Store() {
         }
     }, [isAuth])
 
-
     const { products } = useContext(ProductsContext)
 
-    const { addProduct } = useContext(CartContext)
 
-    function handleAddProduct(id: number) {
-        addProduct(id);
-    }
+    
 
     return (
         <>
@@ -38,26 +30,9 @@ export function Store() {
             <Container>
                 <ProductList>
                     {products.map(product => (
-                        <li key={product.id}>
-                            <img src={product.imagemUrl} alt={product.nome} />
-                            <strong>{product.nome}</strong>
-                            <h6>{product.descricao}</h6>
-                            <span>{product.preco} €</span>
-                            <button
-                                type="button"
-                                onClick={() => handleAddProduct(product.id)}
-                            >
-                                <div>
-                                    <MdAddShoppingCart size={16} color="#FFF" />
-
-                                </div>
-
-                                <span>Adicionar ao carrinho</span>
-                            </button>
-                        </li>
+                       <ProductItem key={product.id} {...product} />
                     ))}
                 </ProductList>
-
             </Container>
         </>
     )

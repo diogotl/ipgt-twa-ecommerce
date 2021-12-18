@@ -10,14 +10,9 @@ export function SideNav() {
 
         <Box as="aside" w="64" mr="8">
             <Stack spacing="12" align="flex-start">
-                <SideNavSection title="GERAL">
-                    <SideNavLink icon={RiDashboardLine} to="/store">Dashboard</SideNavLink>
-                    <SideNavLink icon={RiContactsLine} to="/dashboard">Usuários</SideNavLink>
-                </SideNavSection>
-
                 <SideNavSection title="GESTÃO">
-                    <SideNavLink icon={VscAccount} to="/dashboard">Utilizadores</SideNavLink>
-                    <SideNavLink icon={VscRepo} to="/products">Produtos</SideNavLink>
+                    <SideNavLink icon={VscAccount} to="/dashboard/users">Utilizadores</SideNavLink>
+                    <SideNavLink icon={VscRepo} to="/dashboard/products">Produtos</SideNavLink>
                 </SideNavSection>
             </Stack >
         </Box>

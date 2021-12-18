@@ -1,15 +1,29 @@
-import { Flex, Box, Heading, Link, Stack } from "@chakra-ui/layout"
-import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text, Badge } from "@chakra-ui/react"
-import { useContext } from "react"
-import { RiAddLine, RiPencilLine } from "react-icons/ri"
-import { Header } from "../../components/Header"
-import { SideNav } from "../../components/SideNav"
-import { ProductsContext } from "../../contexts/ProductsContext"
-import { VscEdit } from "react-icons/vsc";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { Header } from "../../components/Header";
+import { SideNav } from "../../components/SideNav";
+import { api } from "../../services/api";
 
-export function Products() {
+interface User {
+    nome: string;
+    password: string;
+    utilizador: string;
+}
 
-    const { products, deleteProduct } = useContext(ProductsContext)
+export function Users() {
+
+    const [users, setUsers] = useState<User[]>([])
+
+    useEffect(() => {
+        async function getProducts() {
+
+            const { data } = await api.get('/conta')
+            setUsers(data)
+
+        }
+        getProducts();
+    }, [])
 
     return (
         <>
@@ -20,15 +34,15 @@ export function Products() {
                     <Box flex="1" borderRadius={8} bg="gray.800" p="8">
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading size="lg" fontWeight="normal">
-                                Lista de produtos
+                                Lista de utilizadores
                             </Heading>
 
-                            <Link href="/dashboard/products/create">
+                            <Link href="/users/create" passHref>
                                 <Button
                                     as="a"
                                     size="sm"
                                     fontSize="sm"
-                                    colorScheme="cyan"
+                                    colorScheme="pink"
                                     leftIcon={<Icon as={RiAddLine} fontSize="20" />}
                                 >
                                     Criar novo
@@ -42,32 +56,26 @@ export function Products() {
                                     <Th px={["2", "4", "6"]} color="gray.300" width="8">
                                         <Checkbox colorScheme="pink" />
                                     </Th>
-                                    <Th>Produto</Th>
-                                    <Th width="6"/>
+                                    <Th>Usuário</Th>
+
+                                    <Th width="6"></Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {products.map(product => {
+                                {users.map(user => {
                                     return (
-                                        <Tr key={product.id}>
-                                            <Td px={["4", "4", "6"]}>
+                                        <Tr key={user.utilizador}>
+                                            <Td px={["4", "6"]}>
                                                 <Checkbox colorScheme="pink" />
                                             </Td>
                                             <Td>
                                                 <Box>
-                                                    <Text fontWeight="bold">{product.nome}</Text>
-                                                    <Badge variant='subtle' colorScheme='cyan'>
-                                                        {product.categoria}
-                                                    </Badge>
-                                                    
+                                                    <Text fontWeight="bold">{user.nome}</Text>
+                                                    <Text fontWeight="sm" color="gray.300">{user.utilizador}</Text>
                                                 </Box>
                                             </Td>
                                             <Td>
-                                                <Stack direction="row">
-
-                                                    <Button as="a" size="sm" fontSize="sm" colorScheme="yellow" leftIcon={<Icon as={VscEdit} fontSize="16" />}>Editar</Button>
-                                                    <Button as="a" size="sm" fontSize="sm" colorScheme="red" leftIcon={<Icon as={RiPencilLine} fontSize="16" />} onClick={() => deleteProduct(product.id)}>Apagar</Button>
-                                                </Stack>
+                                                <Button as="a" size="sm" fontSize="sm" colorScheme="red" leftIcon={<Icon as={RiPencilLine} fontSize="16" />}>Apagar</Button>
                                             </Td>
                                         </Tr>
                                     )
