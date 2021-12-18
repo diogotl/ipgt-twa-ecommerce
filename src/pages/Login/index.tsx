@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 export function Login() {
 
     const { signIn, isAuth } = useContext(AuthContext)
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,7 +40,8 @@ export function Login() {
             password
         }
 
-        await signIn(data)
+        await signIn(data).then(()=> navigate('/store', { replace: true }))
+
     }
 
     return (

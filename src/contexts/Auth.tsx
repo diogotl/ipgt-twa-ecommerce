@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 
@@ -25,7 +25,7 @@ interface AuthContextData {
     user: any
 }
 
-type AuthProviderProps = {
+interface AuthProviderProps {
     children: ReactNode
 }
 
@@ -39,7 +39,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-
         async function loadUser() {
             const username = localStorage.getItem('@Username')
             const token = localStorage.getItem('@Token')
@@ -73,7 +72,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setIsAuth(true)
 
-            navigate("/store")
 
         } catch (error) {
             toast.error('Combinação username/password errada')
@@ -88,11 +86,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 nome,
                 username,
                 password
-            }).catch(erro => (
-                toast.error(`${erro}`)
-            ))
+            })
 
-            //navigate("/login")
+            toast.success('Conta registada, vai ser rederecionado em 5 segundos')
+            
+            setTimeout(function(){
+                navigate('/')
+            }, 5000);
 
         } catch (error) {
             toast.error('A sua conta já está registada')
@@ -100,7 +100,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp,isAuth, user }}>
+        <AuthContext.Provider value={{ signIn, signUp, isAuth, user }}>
             {children}
         </AuthContext.Provider>
     )

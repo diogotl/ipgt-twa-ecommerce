@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 //#region 
-
 interface Product {
     id: number;
     categoria: string;
@@ -20,6 +19,7 @@ interface ProductsProviderProps {
 
 interface CartContextData {
     products: Product[];
+    getProducts(): Promise<void>
     createProduct(data: Product): Promise<void>;
     deleteProduct(id: number): Promise<void>;
 }
@@ -31,13 +31,15 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
 
     const [products, setProducts] = useState<Product[]>([]);
 
+    async function getProducts() {
+        const { data } = await api.get('/produto')
+        setProducts(data)
+    }
+
     useEffect(() => {
-        async function getProducts() {
-            const response = await api.get('/produto')
-            setProducts(response.data)
-        }
         getProducts();
-    }, [products])
+    }, [])
+
 
     async function createProduct({ id, preco, nome, categoria, imagemUrl, descricao }: Product) {
 
@@ -50,8 +52,6 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
                 imagemUrl,
                 descricao
             })
-
-
 
         } catch (error) {
             toast.error(`${error}`)
@@ -69,7 +69,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
     }
 
     return (
-        <ProductsContext.Provider value={{ products, createProduct, deleteProduct }} >
+        <ProductsContext.Provider value={{ products, createProduct, deleteProduct, getProducts }} >
             {children}
         </ProductsContext.Provider>
     )

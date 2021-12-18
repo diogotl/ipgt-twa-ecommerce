@@ -12,16 +12,15 @@ interface Product {
     quantidade: number;
 }
 
-// interface Linha {
-//     produtoId: number,
-//     quantidade: number
-// }
-
 interface UpdateProductAmount {
     id: number;
     quantidade: number;
 }
 
+interface Encomenda {
+    id: number;
+    quantidade: number;
+}
 
 interface CartProviderProps {
     children: ReactNode
@@ -32,6 +31,7 @@ interface CartContextData {
     addProduct: (id: number) => void;
     removeProduct: (id: number) => void;
     updateProductQuantity: ({ id, quantidade }: UpdateProductAmount) => void;
+    handleEncomenda:() => void;
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -40,17 +40,26 @@ export function CartProvider({ children }: CartProviderProps) {
 
     const { products } = useContext(ProductsContext)
 
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<Product[]>(() => {
+        const localStorageCart = localStorage.getItem('@Cart');
+
+        if (localStorageCart) {
+            return JSON.parse(localStorageCart);
+        }
+
+        return [];
+    });
 
     function addProduct(id: number) {
         try {
-            const productExists = products.find(products => products.id === id);
+
+            const productExists = products.find(product => product.id === id);
 
             if (!productExists) {
                 return toast.error('Produto não disponivel')
             }
 
-            const productAlreadyInCart = cart.find(products => products.id === productExists.id);
+            const productAlreadyInCart = cart.find(product => product.id === productExists.id);
 
             if (productAlreadyInCart) {
                 return toast.error(`O produto ${productAlreadyInCart.nome} já existe no carrinho`)
@@ -61,7 +70,9 @@ export function CartProvider({ children }: CartProviderProps) {
                 quantidade: 1
             }
 
-            setCart([...cart, product]);
+            setCart([...cart, product])
+            localStorage.setItem('@Cart', JSON.stringify(cart))
+
         } catch {
             return toast.error(`Erro, por favor tente mais tarde`)
         }
@@ -82,18 +93,10 @@ export function CartProvider({ children }: CartProviderProps) {
         quantidade,
     }: UpdateProductAmount) {
         try {
+
             if (quantidade <= 0) {
                 return;
             }
-
-            //const stock = await api.get(`/stock/${productId}`);
-
-            // const stockAmount = stock.data.amount;
-
-            // if (amount > stockAmount) {
-            //     toast.error('Quantidade solicitada fora de estoque');
-            //     return;
-            // }
 
             const updatedCart = [...cart];
             const productExists = updatedCart.find(product => product.id === id);
@@ -101,6 +104,7 @@ export function CartProvider({ children }: CartProviderProps) {
             if (productExists) {
                 productExists.quantidade = quantidade;
                 setCart(updatedCart);
+                localStorage.setItem('@Cart', JSON.stringify(updatedCart))
             } else {
                 toast.error('Erro na alteração de quantidade do produto');
             }
@@ -109,10 +113,20 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     };
 
+    //const [linha,setLinha] = useState<Encomenda[]>([])
+    function handleEncomenda() {
+        
+        //setLinha(cart)
+
+        //  } = cart.map(produto => produto.id)
+
+        //console.log(novo)
+    }
+
 
     return (
         <CartContext.Provider
-            value={{ cart, addProduct, removeProduct, updateProductQuantity }}
+            value={{ cart, addProduct, removeProduct, updateProductQuantity,handleEncomenda }}
         >
             {children}
         </CartContext.Provider>

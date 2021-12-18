@@ -14,6 +14,16 @@ import { Header } from '../../components/Header'
 
 export function CheckOut() {
 
+    interface Product {
+        id: number;
+        categoria: string;
+        imagemUrl: string;
+        descricao: string;
+        nome: string;
+        preco: number;
+        quantidade: number;
+    }
+
     const { cart } = useContext(CartContext)
 
     return (

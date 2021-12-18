@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Header } from "../../components/Header";
 import { Container, ProductList } from "./styles";
 import { ProductsContext } from "../../contexts/ProductsContext";
@@ -12,25 +12,32 @@ export function Store() {
     const { isAuth } = useContext(AuthContext)
     const navigate = useNavigate();
 
+    interface Product {
+        id: number;
+        categoria: string;
+        imagemUrl: string;
+        descricao: string;
+        nome: string;
+        preco: number;
+        quantidade?: number;
+    }
+    
     useEffect(() => {
         if (!isAuth) {
             navigate('/')
         }
-    }, [isAuth])
-
-    const { products } = useContext(ProductsContext)
-
-
+    }, [])
     
-
+    const { products } = useContext(ProductsContext)
+  
     return (
         <>
             <Header />
-            <Filter/>
+            <Filter />
             <Container>
                 <ProductList>
                     {products.map(product => (
-                       <ProductItem key={product.id} {...product} />
+                        <ProductItem key={product.id} {...product} />
                     ))}
                 </ProductList>
             </Container>
