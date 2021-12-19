@@ -31,7 +31,7 @@ interface CartContextData {
     addProduct: (id: number) => void;
     removeProduct: (id: number) => void;
     updateProductQuantity: ({ id, quantidade }: UpdateProductAmount) => void;
-    handleEncomenda:() => void;
+    handleEncomenda: () => void;
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -49,6 +49,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
         return [];
     });
+
+
 
     function addProduct(id: number) {
         try {
@@ -113,10 +115,12 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     };
 
-    //const [linha,setLinha] = useState<Encomenda[]>([])
+    const [linha,setLinha] = useState<Encomenda[]>([])
     function handleEncomenda() {
-        
-        //setLinha(cart)
+
+        const filteredCart = cart.map(({ categoria, descricao, imagemUrl, nome, preco, ...produto }) => produto)
+        setLinha(filteredCart)
+        console.log(linha)
 
         //  } = cart.map(produto => produto.id)
 
@@ -126,7 +130,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
     return (
         <CartContext.Provider
-            value={{ cart, addProduct, removeProduct, updateProductQuantity,handleEncomenda }}
+            value={{ cart, addProduct, removeProduct, updateProductQuantity, handleEncomenda }}
         >
             {children}
         </CartContext.Provider>
