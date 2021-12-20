@@ -1,15 +1,11 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
-
-import { Divider, Grid, Heading, Link } from "@chakra-ui/layout";
-import { Flex, Text, Stack, FormLabel, FormControl, Button } from "@chakra-ui/react";
-
-import { Input } from '../../components/Form/Input'
-import { toast } from "react-toastify";
+import { Flex, Text, Stack, FormLabel, FormControl, Button, Divider, Grid, Heading, Link } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 import { AuthContext } from "../../contexts/Auth";
 
+import { Input } from '../../components/Form/Input'
 import { Logo } from "../../components/Logo";
-import { useNavigate } from "react-router";
 
 export function Login() {
 
@@ -27,7 +23,6 @@ export function Login() {
 
     }, [isAuth])
 
-
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
@@ -40,8 +35,7 @@ export function Login() {
             password
         }
 
-        await signIn(data).then(()=> navigate('/store', { replace: true }))
-
+        await signIn(data).then(() => navigate('/store', { replace: true }))
     }
 
     return (
@@ -81,22 +75,6 @@ export function Login() {
             >
                 <Stack spacing="1.4rem">
                     <Input name="username" label="Username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
-                    {/* <FormControl>
-                        <FormLabel htmlFor="username">Username</FormLabel>
-                        <Input
-                            size="lg"
-                            id="username"
-                            name="username"
-                            variant="filled"
-                            bgColor="gray.900"
-                            focusBorderColor="teal.300"
-                            borderRadius="md"
-                            _hover={{
-                                bgColor: "gray.900"
-                            }}
-                            onChange={e => setUsername(e.target.value)}
-                        />
-                    </FormControl> */}
                     <FormControl>
                         <FormLabel htmlFor="password">Password</FormLabel>
                         <Input

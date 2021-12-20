@@ -1,45 +1,30 @@
-import {
-    Box,
-    Flex,
-    HStack,
-    Stack,
-    Text
-} from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
 import { useContext } from 'react'
-import { CartItem } from '../../components/Cart/CartItem'
-import { CartOrder } from '../../components/CartOrder'
+import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+
 import { CartContext } from '../../contexts/CartContext'
+
+import { SideNavEncomenda } from '../../components/SideNav/SideNavEncomenda'
+import { CartItem } from '../../components/Cart/CartItem'
+import { CartOrder } from '../../components/Cart/CartOrder'
 import { Header } from '../../components/Header'
 
 export function CheckOut() {
-
-    interface Product {
-        id: number;
-        categoria: string;
-        imagemUrl: string;
-        descricao: string;
-        nome: string;
-        preco: number;
-        quantidade: number;
-    }
 
     const { cart } = useContext(CartContext)
 
     return (
         <>
             <Header />
-            <Box
-                maxW="1280px"
-                mx="auto"
-                px={{ base: '8', md: '12' }}
-                py={{ base: '8', md: '12' }}
-            >
+            <Box w="100%" my="10" maxW="1480px" mx="auto" px="10" >
                 <Stack
                     direction={{ base: 'column', lg: 'row' }}
                     spacing="4rem"
                 >
-                    <Stack spacing={{ base: '8', md: '10' }} flex="3">
+
+                    <SideNavEncomenda />
+
+                    <Stack spacing={{ base: '8', md: '10' }} flex="2">
                         <Text fontSize="2xl" fontWeight="extrabold">
                             Carrinho ({cart.length > 0 ? cart.length : <Text as="span" fontWeight="medium" textColor="cyan.300">  Sem </Text>} <Text as="span" textColor="cyan.300">itens no carrinho</Text> )
                         </Text>

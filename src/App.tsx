@@ -5,10 +5,8 @@ import { ProductsProvider } from "./contexts/ProductsContext";
 import { ChakraProvider, } from "@chakra-ui/react";
 import { theme } from './styles/theme'
 import { BrowserRouter } from "react-router-dom";
-
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
 
 export function App() {
   return (
@@ -20,7 +18,7 @@ export function App() {
               <ProductsProvider>
                 <CartProvider>
                   <AppRoutes />
-                  <ToastContainer autoClose={4000} />
+                  <ToastContainer autoClose={5000} />
                 </CartProvider>
               </ProductsProvider>
             </CartProvider>
@@ -30,4 +28,3 @@ export function App() {
     </>
   );
 }
-

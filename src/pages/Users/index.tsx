@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th,
 import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
-import { SideNav } from "../../components/SideNav";
+import { SideNavGestao } from "../../components/SideNav/SideNavGestao";
 import { api } from "../../services/api";
 
 interface User {
@@ -30,7 +30,7 @@ export function Users() {
             <Header />
             <Flex>
                 <Flex w="100%" my="10" maxW="1480px" mx="auto" px="10" >
-                    <SideNav />
+                    <SideNavGestao />
                     <Box flex="1" borderRadius={8} bg="gray.800" p="8">
                         <Flex mb="8" justify="space-between" align="center">
                             <Heading size="lg" fontWeight="normal">

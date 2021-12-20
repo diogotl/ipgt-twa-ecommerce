@@ -36,11 +36,6 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
         setProducts(data)
     }
 
-    useEffect(() => {
-        getProducts();
-    }, [])
-
-
     async function createProduct({ id, preco, nome, categoria, imagemUrl, descricao }: Product) {
 
         try {

@@ -1,12 +1,13 @@
+import { FormEvent, useContext, useState } from 'react';
+
 import { Flex, Box, Heading, VStack, SimpleGrid, Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { Header } from '../../components/Header';
-import { SideNav } from '../../components/SideNav';
 import { Input } from '../../components/Form/Input'
-import { FormEvent, useContext, useState } from 'react';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import { ProductsContext } from '../../contexts/ProductsContext';
+import { SideNavGestao } from '../../components/SideNav/SideNavGestao';
 
 export function ProductsForm() {
 
@@ -50,7 +51,7 @@ export function ProductsForm() {
         toast.success('Produto adicionado com sucesso,irá ser rederecionado')
 
         return (
-            <Link to="/products"/>
+            <Link to="/products" />
         )
     }
 
@@ -59,7 +60,7 @@ export function ProductsForm() {
         <Box>
             <Header />
             <Flex w="100%" my="10" maxW="1480px" mx="auto" px="10" >
-                <SideNav />
+                <SideNavGestao />
                 <Box as="form" flex="1" borderRadius={8} bg="gray.800" p="2rem" onSubmit={handleCreateProduct}>
                     <Heading size="lg" fontWeight="normal" mb='1rem'>
                         Lista de produtos

@@ -1,11 +1,11 @@
 import { Icon, Text, Link, LinkProps } from "@chakra-ui/react";
-import { ElementType } from "react";
+import { ElementType, ReactNode } from "react";
 import { ActiveLink } from "../ActiveLink";
 
 interface SideNavLink extends LinkProps {
     icon: ElementType;
     to: string;
-    children: string;
+    children: ReactNode;
 }
 
 export function SideNavLink({ icon, to, children, ...rest }: SideNavLink) {

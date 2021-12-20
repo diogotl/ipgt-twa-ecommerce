@@ -12,24 +12,18 @@ export function Store() {
     const { isAuth } = useContext(AuthContext)
     const navigate = useNavigate();
 
-    interface Product {
-        id: number;
-        categoria: string;
-        imagemUrl: string;
-        descricao: string;
-        nome: string;
-        preco: number;
-        quantidade?: number;
-    }
-    
     useEffect(() => {
         if (!isAuth) {
             navigate('/')
         }
     }, [])
-    
-    const { products } = useContext(ProductsContext)
-  
+
+    const { products, getProducts } = useContext(ProductsContext)
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
     return (
         <>
             <Header />

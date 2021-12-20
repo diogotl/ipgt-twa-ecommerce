@@ -24,7 +24,7 @@ export function Header() {
       >
         <HStack spacing="1rem">
           <ActiveLink to="/dashboard/products" children={<Icon fontSize="20" as={RiAdminLine} />} />
-          <ActiveLink to="/checkout" children={<Icon fontSize="20" as={HiOutlineShoppingCart} />} />
+          <ActiveLink to="/checkout/cart" children={<Icon fontSize="20" as={HiOutlineShoppingCart} />} />
         </HStack>
 
         <Flex align='center' ml="3rem">

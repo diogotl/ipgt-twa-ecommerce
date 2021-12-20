@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { createContext, ReactNode, useContext, useState } from 'react'
 import { ProductsContext } from './ProductsContext';
+import { api } from '../services/api';
 
 interface Product {
     id: number;
@@ -17,11 +18,6 @@ interface UpdateProductAmount {
     quantidade: number;
 }
 
-interface Encomenda {
-    id: number;
-    quantidade: number;
-}
-
 interface CartProviderProps {
     children: ReactNode
 }
@@ -31,7 +27,7 @@ interface CartContextData {
     addProduct: (id: number) => void;
     removeProduct: (id: number) => void;
     updateProductQuantity: ({ id, quantidade }: UpdateProductAmount) => void;
-    handleEncomenda: () => void;
+    handleEncomenda: () => Promise<void>;
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -49,8 +45,6 @@ export function CartProvider({ children }: CartProviderProps) {
 
         return [];
     });
-
-
 
     function addProduct(id: number) {
         try {
@@ -115,18 +109,42 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     };
 
-    const [linha,setLinha] = useState<Encomenda[]>([])
-    function handleEncomenda() {
+    async function handleEncomenda() {
 
-        const filteredCart = cart.map(({ categoria, descricao, imagemUrl, nome, preco, ...produto }) => produto)
-        setLinha(filteredCart)
-        console.log(linha)
+        const localStorageCart = localStorage.getItem('@Cart');
 
-        //  } = cart.map(produto => produto.id)
+        if (localStorageCart) {
+            setCart(JSON.parse(localStorageCart));
+        }
 
-        //console.log(novo)
+        if (cart.length <= 0) {
+            
+        }
+
+        const linhas = cart.map(produto => {
+            return {
+                'produtoId': produto.id,
+                'quantidade': produto.quantidade
+            }
+        })
+
+        const data = {
+            linhas
+        }
+
+        try {
+
+            await api.post('/encomenda', data)
+
+            toast.success('A sua encomenda ')
+
+            setCart([])
+            localStorage.removeItem("@Crt");
+
+        } catch (error) {
+            toast.error(`${error}`)
+        }
     }
-
 
     return (
         <CartContext.Provider

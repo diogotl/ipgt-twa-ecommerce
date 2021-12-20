@@ -1,29 +1,22 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue as mode,
-} from '@chakra-ui/react'
+import { ReactNode, useContext } from 'react'
 
-import { useContext } from 'react'
+import { Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react'
+
+import { CartContext } from '../../../contexts/CartContext'
+
 import { FaArrowRight } from 'react-icons/fa'
-import { CartContext } from '../../contexts/CartContext'
+
 
 type OrderSummaryItemProps = {
   label: string
   value?: number
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
-
-const OrderSummaryItem = (props: OrderSummaryItemProps) => {
-  const { label, value, children } = props
+export function OrderSummaryItem({ label, value, children }: OrderSummaryItemProps) {
   return (
     <Flex justify="space-between" fontSize="sm">
-      <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
+      <Text fontWeight="medium" color='gray.600'>
         {label}
       </Text>
       {value ? <Text fontWeight="medium">{value}</Text> : children}

@@ -1,10 +1,4 @@
-import {
-  Badge,
-  Box,
-  Image,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
+import { Badge, Box, Image, Stack, Text, } from '@chakra-ui/react'
 
 interface CartProductProps {
   nome: string

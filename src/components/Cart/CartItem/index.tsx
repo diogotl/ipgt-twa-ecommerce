@@ -1,9 +1,11 @@
-import { Flex, Text, Stack, IconButton } from '@chakra-ui/react'
 import { useContext } from 'react'
-import { IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp } from 'react-icons/io5'
-import { CartContext } from '../../../contexts/CartContext'
-import { CartProductMeta } from '../../CartMeta'
+import { Flex, Text, Stack, IconButton } from '@chakra-ui/react'
 
+import { CartContext } from '../../../contexts/CartContext'
+
+import { CartProductMeta } from '../../Cart/CartMeta'
+
+import { IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp } from 'react-icons/io5'
 
 interface Product {
     id: number;

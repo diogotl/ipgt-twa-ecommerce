@@ -1,14 +1,10 @@
-import { Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, Text, Flex, Stack, Select, Input, HStack } from "@chakra-ui/react"
-import { useState } from "react"
+import { Flex, Select, Input, HStack } from "@chakra-ui/react"
 
 interface FilterProps{
 
 }
 
 export function Filter() {
-
-   
-    
 
     return (
         <Flex w="100%" my="10" maxW="1280px" mx="auto" px="10" bgColor="gray.800" padding="2rem" borderRadius="xl">
