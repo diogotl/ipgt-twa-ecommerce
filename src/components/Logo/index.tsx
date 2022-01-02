@@ -7,8 +7,8 @@ export function Logo() {
       fontWeight='bold'
       letterSpacing='tight'
     >
-      wh
-      <Text as='span' color='cyan.300'>isla</Text>
+      wish
+      <Text as='span' color='cyan.300'>la</Text>
     </Text>
   )
 }

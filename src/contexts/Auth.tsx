@@ -1,11 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-
-type User = {
-    username: string
-}
 
 interface SignInData {
     username: string;
@@ -21,6 +17,7 @@ interface SignUpData {
 interface AuthContextData {
     signUp(data: SignUpData): Promise<void>
     signIn(data: SignInData): Promise<void>
+    signOut(): void;
     isAuth: boolean;
     user: any
 }
@@ -39,18 +36,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        async function loadUser() {
-            const username = localStorage.getItem('@Username')
-            const token = localStorage.getItem('@Token')
-
-            if (token && username) {
-                api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                setUser(username)
-                setIsAuth(true)
-            }
-        }
-        loadUser()
+        loadUserFromStorage()
     }, [])
+
+    async function loadUserFromStorage() {
+        const username = localStorage.getItem('@Username')
+        const token = localStorage.getItem('@Token')
+
+        if (token && username) {
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            setUser(username)
+            setIsAuth(true)
+        }
+    }
 
     async function signIn({ username, password }: SignInData) {
 
@@ -78,6 +76,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    function signOut() {
+        localStorage.removeItem('@Username')
+        localStorage.removeItem('@Token')
+
+        api.defaults.headers.common = { 'Authorization': '' }
+
+        setIsAuth(false)
+
+        navigate('/')
+    }
+
     async function signUp({ nome, username, password }: SignUpData) {
 
         try {
@@ -89,8 +98,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             })
 
             toast.success('Conta registada, vai ser rederecionado em 5 segundos')
-            
-            setTimeout(function(){
+
+            setTimeout(function () {
                 navigate('/')
             }, 5000);
 
@@ -100,7 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, isAuth, user }}>
+        <AuthContext.Provider value={{ signIn, signUp, signOut, isAuth, user }}>
             {children}
         </AuthContext.Provider>
     )

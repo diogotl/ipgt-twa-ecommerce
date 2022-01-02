@@ -22,6 +22,5 @@ export function AppRoutes() {
       <Route path="/dashboard/products/create" element={<ProductsForm />} />
       <Route path="*" element={<NotFound404 />} />
     </Routes>
-
   );
 }

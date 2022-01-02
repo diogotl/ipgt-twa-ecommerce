@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { HiOutlineShoppingCart, } from 'react-icons/hi';
 import { RiAdminLine } from 'react-icons/ri';
+import { GoX } from "react-icons/go";
 
 import { Logo } from '../Logo';
-import { Avatar, Box, Flex, HStack, Icon, Text } from '@chakra-ui/react';
+import { Avatar, Box, Flex, HStack, Icon, Text,IconButton } from '@chakra-ui/react';
 import { ActiveLink } from '../ActiveLink';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth';
 
 export function Header() {
 
-  const { user } = useContext(AuthContext)
+  const { user, signOut } = useContext(AuthContext)
 
   return (
     <Flex as="header" w="100%" h="5rem" mt="2rem" mx="auto" px="6" align="center" maxWidth={1480}>
@@ -37,8 +38,12 @@ export function Header() {
               {user}
             </Text>
           </Box>
-          <Avatar colorScheme="teal" size='md' name={user} />
+          <Avatar colorScheme="facebook" size='md' name={user} />
         </Flex>
+
+        <HStack marginLeft="1rem">
+          <IconButton aria-label="Sair da aplicação" variant='unstyled' icon={<GoX />} onClick={() => signOut()} />
+        </HStack>
 
       </Flex>
 
