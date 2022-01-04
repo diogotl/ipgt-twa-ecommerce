@@ -26,9 +26,10 @@ export function Header() {
         <HStack spacing="1rem">
           <ActiveLink to="/dashboard/products" children={<Icon fontSize="20" as={RiAdminLine} />} />
           <ActiveLink to="/checkout/cart" children={<Icon fontSize="20" as={HiOutlineShoppingCart} />} />
+          <IconButton aria-label="Sair da aplicação" variant='unstyled' icon={<GoX />} onClick={() => signOut()} />
         </HStack>
 
-        <Flex align='center' ml="3rem">
+        <Flex align='center' ml="1rem">
           <Box
             mr="1rem"
             textAlign='right'
@@ -40,11 +41,6 @@ export function Header() {
           </Box>
           <Avatar colorScheme="facebook" size='md' name={user} />
         </Flex>
-
-        <HStack marginLeft="1rem">
-          <IconButton aria-label="Sair da aplicação" variant='unstyled' icon={<GoX />} onClick={() => signOut()} />
-        </HStack>
-
       </Flex>
 
     </Flex>

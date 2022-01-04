@@ -18,6 +18,7 @@ interface AuthContextData {
     signUp(data: SignUpData): Promise<void>
     signIn(data: SignInData): Promise<void>
     signOut(): void;
+    loadUserFromStorage(): void
     isAuth: boolean;
     user: any
 }
@@ -70,7 +71,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setIsAuth(true)
 
-
         } catch (error) {
             toast.error('Combinação username/password errada')
         }
@@ -79,6 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     function signOut() {
         localStorage.removeItem('@Username')
         localStorage.removeItem('@Token')
+        localStorage.removeItem('@Cart')
 
         api.defaults.headers.common = { 'Authorization': '' }
 
@@ -91,7 +92,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         try {
 
-            const response = await api.post('/conta/registar', {
+            await api.post('/conta/registar', {
                 nome,
                 username,
                 password
@@ -109,7 +110,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, signOut, isAuth, user }}>
+        <AuthContext.Provider value={{ signIn, signUp, signOut, loadUserFromStorage, isAuth, user }}>
             {children}
         </AuthContext.Provider>
     )

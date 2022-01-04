@@ -1,6 +1,8 @@
-import { Button, Divider, Flex, FormControl, FormLabel, Grid, Heading, Input, Link, Stack, Text } from "@chakra-ui/react";
 import { useState, FormEvent, useContext } from "react";
+import { Button, Flex, FormControl, FormLabel, Grid, Heading, Input, Stack, Text } from "@chakra-ui/react";
+
 import { toast } from "react-toastify";
+
 import { Logo } from "../../components/Logo";
 import { AuthContext } from "../../contexts/Auth";
 

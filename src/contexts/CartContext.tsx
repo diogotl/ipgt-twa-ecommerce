@@ -139,7 +139,7 @@ export function CartProvider({ children }: CartProviderProps) {
             toast.success('A sua encomenda ')
 
             setCart([])
-            localStorage.removeItem("@Crt");
+            localStorage.removeItem("@Cart");
 
         } catch (error) {
             toast.error(`${error}`)

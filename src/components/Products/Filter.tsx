@@ -7,7 +7,7 @@ interface FilterProps{
 export function Filter() {
 
     return (
-        <Flex w="100%" my="10" maxW="1280px" mx="auto" px="10" bgColor="gray.800" padding="2rem" borderRadius="xl">
+        <Flex w="100%" my="3rem" maxWidth={1200} mx="auto" bgColor="gray.800" padding="2rem" borderRadius="xl">
             <HStack spacing={8} flexDirection="row" alignItems="flex-end">
                 <Input as="input" colorScheme="teal" placeholder='Basic usage' />
                 <Select as="select" colorScheme="teal" placeholder='Select option'>

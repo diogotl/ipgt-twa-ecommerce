@@ -1,6 +1,5 @@
 import { AspectRatio, Button, Stack, Text, Image } from "@chakra-ui/react";
 import { useContext } from "react";
-import { MdAddShoppingCart } from "react-icons/md";
 import { CartContext } from "../../contexts/CartContext";
 
 interface Product {

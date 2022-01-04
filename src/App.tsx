@@ -6,6 +6,7 @@ import { ChakraProvider, } from "@chakra-ui/react";
 import { theme } from './styles/theme'
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 export function App() {

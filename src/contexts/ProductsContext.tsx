@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
+import { AuthContext } from "./Auth";
 
 //#region 
 interface Product {
@@ -28,6 +29,10 @@ interface CartContextData {
 export const ProductsContext = createContext<CartContextData>({} as CartContextData);
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
+
+    useEffect(() => {
+        getProducts();
+    }, [])
 
     const [products, setProducts] = useState<Product[]>([]);
 

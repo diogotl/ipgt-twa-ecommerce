@@ -16,13 +16,13 @@ export function Users() {
     const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
-        async function getProducts() {
+        async function getUsers() {
 
             const { data } = await api.get('/conta')
             setUsers(data)
 
         }
-        getProducts();
+        getUsers();
     }, [])
 
     return (
@@ -56,7 +56,7 @@ export function Users() {
                                     <Th px={["2", "4", "6"]} color="gray.300" width="8">
                                         <Checkbox colorScheme="pink" />
                                     </Th>
-                                    <Th>Usuário</Th>
+                                    <Th>Utilizador</Th>
 
                                     <Th width="6"></Th>
                                 </Tr>
