@@ -18,9 +18,8 @@ interface AuthContextData {
     signUp(data: SignUpData): Promise<void>
     signIn(data: SignInData): Promise<void>
     signOut(): void;
-    loadUserFromStorage(): void
     isAuth: boolean;
-    user: any
+    user: string
 }
 
 interface AuthProviderProps {
@@ -37,19 +36,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        loadUserFromStorage()
-    }, [])
-
-    async function loadUserFromStorage() {
-        const username = localStorage.getItem('@Username')
         const token = localStorage.getItem('@Token')
+        const username = localStorage.getItem('@Username')
 
         if (token && username) {
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             setUser(username)
             setIsAuth(true)
         }
-    }
+    }, [])
 
     async function signIn({ username, password }: SignInData) {
 
@@ -61,15 +56,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
             })
 
             const { token } = response.data;
-
-            setUser(username)
-
+            
             localStorage.setItem('@Username', username)
             localStorage.setItem('@Token', token)
-
             api.defaults.headers.common = { 'Authorization': `Bearer ${token}` }
-
+            
+            setUser(username)
             setIsAuth(true)
+            
+            navigate('/store')
 
         } catch (error) {
             toast.error('Combinação username/password errada')
@@ -84,7 +79,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         api.defaults.headers.common = { 'Authorization': '' }
 
         setIsAuth(false)
-
         navigate('/')
     }
 
@@ -110,7 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, signOut, loadUserFromStorage, isAuth, user }}>
+        <AuthContext.Provider value={{ signIn, signUp, signOut, isAuth, user }}>
             {children}
         </AuthContext.Provider>
     )

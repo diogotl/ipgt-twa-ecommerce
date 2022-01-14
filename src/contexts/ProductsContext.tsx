@@ -23,16 +23,14 @@ interface CartContextData {
     getProducts(): Promise<void>
     createProduct(data: Product): Promise<void>;
     deleteProduct(id: number): Promise<void>;
+    setProducts: any
 }
+
 //#endregion
 
 export const ProductsContext = createContext<CartContextData>({} as CartContextData);
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
-
-    useEffect(() => {
-        getProducts();
-    }, [])
 
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -69,7 +67,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
     }
 
     return (
-        <ProductsContext.Provider value={{ products, createProduct, deleteProduct, getProducts }} >
+        <ProductsContext.Provider value={{ products, createProduct, deleteProduct, getProducts, setProducts }} >
             {children}
         </ProductsContext.Provider>
     )

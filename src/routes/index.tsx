@@ -10,12 +10,13 @@ import { ProductsForm } from '../pages/ProductsForm';
 import { NotFound404 } from '../pages/NotFound404';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/Auth';
+import { Orders } from '../pages/Orders';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
 
   const { isAuth } = useContext(AuthContext)
 
-  let location = useLocation();
+  const location = useLocation();
 
   if (!isAuth) {
     return <Navigate to="/" state={{ from: location }} replace />;
@@ -31,10 +32,10 @@ export function AppRoutes() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/store" element={<RequireAuth><Store /></RequireAuth>} />
       <Route path="/checkout/cart" element={<RequireAuth><CheckOut /></RequireAuth>} />
-      <Route path="/checkout/orders" element={<CheckOut />} />
-      <Route path="/dashboard/users" element={<Users />} />
-      <Route path="/dashboard/products" element={<Products />} />
-      <Route path="/dashboard/products/create" element={<ProductsForm />} />
+      <Route path="/checkout/orders" element={<RequireAuth><Orders /></RequireAuth>} />
+      <Route path="/dashboard/users" element={<RequireAuth><Users /></RequireAuth>} />
+      <Route path="/dashboard/products" element={<RequireAuth><Products /></RequireAuth>} />
+      <Route path="/dashboard/products/create" element={<RequireAuth><ProductsForm /></RequireAuth>} />
       <Route path="*" element={<NotFound404 />} />
     </Routes>
   );

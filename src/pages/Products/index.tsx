@@ -8,6 +8,8 @@ import { Header } from "../../components/Header"
 import { ProductsContext } from "../../contexts/ProductsContext"
 import { SideNavGestao } from "../../components/SideNav/SideNavGestao"
 
+import { Link as RouterLink } from 'react-router-dom'
+
 export function Products() {
 
     const { products, deleteProduct } = useContext(ProductsContext)
@@ -24,7 +26,7 @@ export function Products() {
                                 Lista de produtos
                             </Heading>
 
-                            <Link href="/dashboard/products/create">
+                            <RouterLink to="/dashboard/products/create">
                                 <Button
                                     as="a"
                                     size="sm"
@@ -34,13 +36,13 @@ export function Products() {
                                 >
                                     Criar novo
                                 </Button>
-                            </Link>
+                            </RouterLink>
                         </Flex>
 
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th px={["2", "4", "6"]} color="gray.300" width="8">
+                                    <Th px="6" color="gray.300" width="8">
                                         <Checkbox colorScheme="pink" />
                                     </Th>
                                     <Th>Produto</Th>
@@ -51,7 +53,7 @@ export function Products() {
                                 {products.map(product => {
                                     return (
                                         <Tr key={product.id}>
-                                            <Td px={["4", "4", "6"]}>
+                                            <Td px="6">
                                                 <Checkbox colorScheme="pink" />
                                             </Td>
                                             <Td>

@@ -13,6 +13,21 @@ interface Product {
     quantidade: number;
 }
 
+interface Order {
+    dataCompra: string,
+    linhas: Array<{
+        quantidade: number;
+        produtoDTO: {
+            id: number;
+            categoria: string;
+            imagemUrl: string;
+            descricao: string;
+            nome: string;
+            preco: number;
+        };
+    }>;
+}
+
 interface UpdateProductAmount {
     id: number;
     quantidade: number;
@@ -28,6 +43,8 @@ interface CartContextData {
     removeProduct: (id: number) => void;
     updateProductQuantity: ({ id, quantidade }: UpdateProductAmount) => void;
     handleEncomenda: () => Promise<void>;
+    order: Order[]
+    getOrders(): Promise<void>
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -45,6 +62,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
         return [];
     });
+
+    const [order, setOrder] = useState<Order[]>([]);
 
     function addProduct(id: number) {
         try {
@@ -117,11 +136,9 @@ export function CartProvider({ children }: CartProviderProps) {
             setCart(JSON.parse(localStorageCart));
         }
 
-        if (cart.length <= 0) {
-            
-        }
+        const order = [...cart]
 
-        const linhas = cart.map(produto => {
+        const linhas = order.map(produto => {
             return {
                 'produtoId': produto.id,
                 'quantidade': produto.quantidade
@@ -136,7 +153,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
             await api.post('/encomenda', data)
 
-            toast.success('A sua encomenda ')
+            toast.success('A sua encomenda foi bem sucedida')
 
             setCart([])
             localStorage.removeItem("@Cart");
@@ -146,9 +163,14 @@ export function CartProvider({ children }: CartProviderProps) {
         }
     }
 
+    async function getOrders() {
+        const { data } = await api.get('/encomenda')
+        setOrder(data)
+    }
+
     return (
         <CartContext.Provider
-            value={{ cart, addProduct, removeProduct, updateProductQuantity, handleEncomenda }}
+            value={{ cart, addProduct, removeProduct, updateProductQuantity, handleEncomenda, order,getOrders }}
         >
             {children}
         </CartContext.Provider>

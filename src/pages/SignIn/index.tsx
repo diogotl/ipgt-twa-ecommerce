@@ -15,14 +15,12 @@ export function SignIn() {
     const navigate = useNavigate();
 
     useEffect(() => {
-
         if (isAuth) {
             navigate('/store')
         } else {
             navigate('/')
         }
-
-    }, [isAuth])
+    }, [])
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -35,8 +33,6 @@ export function SignIn() {
             username,
             password
         }
-
-        //await signIn(data).then(() => navigate('/store', { replace: true }))
 
         await signIn(data)
     }
@@ -98,7 +94,7 @@ export function SignIn() {
                 </Stack>
                 <Button size="lg" type="submit" mt="2rem" color="gray.900" bgColor="teal.400">Login</Button>
                 <Divider marginY="1.2rem" variant="dashed" />
-                <Text>Ainda não é cliente? <RouterLink to="/signup" color="teal.400"><Link color="teal.400" fontWeight="bold">Registar agora!</Link></RouterLink></Text>
+                <><Text>Ainda não é cliente? </Text> <RouterLink to="/signup" color="teal.400"><Text color="teal.400" fontWeight="bold">Registar agora!</Text></RouterLink></>
             </Flex>
         </Grid>
     )

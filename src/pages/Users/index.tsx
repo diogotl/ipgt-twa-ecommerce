@@ -53,7 +53,7 @@ export function Users() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th px={["2", "4", "6"]} color="gray.300" width="8">
+                                    <Th px="6" color="gray.300" width="8">
                                         <Checkbox colorScheme="pink" />
                                     </Th>
                                     <Th>Utilizador</Th>
@@ -65,7 +65,7 @@ export function Users() {
                                 {users.map(user => {
                                     return (
                                         <Tr key={user.utilizador}>
-                                            <Td px={["4", "6"]}>
+                                            <Td px="4">
                                                 <Checkbox colorScheme="pink" />
                                             </Td>
                                             <Td>

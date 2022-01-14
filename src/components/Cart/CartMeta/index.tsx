@@ -12,7 +12,7 @@ export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps
     <Stack direction="row" spacing="8" width="full">
       <Image
         rounded="2xl"
-        width="200px"
+        minWidth="100px"
         height="100px"
         fit="fill"
         src={imagemURL}
@@ -23,9 +23,7 @@ export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps
         <Stack spacing="1rem">
           <Text fontWeight="medium">{nome}</Text>
         </Stack>
-        <Badge variant='subtle' colorScheme='cyan'>
-          {categoria}
-        </Badge>
+        <Badge variant='subtle' colorScheme='cyan'>{categoria}</Badge>
       </Box>
     </Stack>
   )

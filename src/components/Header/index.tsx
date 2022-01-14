@@ -35,11 +35,11 @@ export function Header() {
             textAlign='right'
           >
             <Text fontSize="lg" fontWeight="bold">Bem-vindo,</Text>
-            <Text color='teal.300' fontSize="md">
+            <Text color='cyan' fontSize="sm">
               {user}
             </Text>
           </Box>
-          <Avatar colorScheme="facebook" size='md' name={user} />
+          <Avatar colorScheme='cyan' size='md' name={user} />
         </Flex>
       </Flex>
 
