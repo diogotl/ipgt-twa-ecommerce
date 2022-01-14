@@ -62,7 +62,7 @@ export function ProductsForm() {
                 <SideNavGestao />
                 <Box as="form" flex="1" borderRadius={8} bg="gray.800" p="2rem" onSubmit={handleCreateProduct}>
                     <Heading size="lg" fontWeight="normal" mb='1rem'>
-                        Lista de produtos
+                        Produto
                     </Heading>
                     <VStack spacing="1.2rem">
                         <SimpleGrid minChildWidth="300px" spacing="2rem" w="100%" dir="horizontal">
@@ -78,7 +78,7 @@ export function ProductsForm() {
                     </VStack>
                     <Flex mt="1.4rem" justify="flex-end">
                         <Button size="lg" type="submit" mt="2rem" colorScheme="whiteAlpha">
-                            <Link to='/dashboard'>Cancelar</Link>
+                            <Link to='/dashboard/products'>Cancelar</Link>
                         </Button>
                         <Button ml="2rem" size="lg" type="submit" mt="2rem" color="gray.900" bgColor="teal.400">Criar</Button>
                     </Flex>

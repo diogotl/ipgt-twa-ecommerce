@@ -6,7 +6,7 @@ interface CartProductProps {
   categoria: string
 }
 
-export const CartProductMeta = ({ nome, imagemURL, categoria }: CartProductProps) => {
+export function CartProduct ({ nome, imagemURL, categoria }: CartProductProps) {
 
   return (
     <Stack direction="row" spacing="8" width="full">

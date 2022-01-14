@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
 
-import { Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react'
+import { Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 
 import { CartContext } from '../../../contexts/CartContext'
 
@@ -32,28 +32,6 @@ export const CartOrder = () => {
   return (
     <Stack spacing="8" borderWidth="2px" rounded="lg" padding="10" width="full" bg="gray.900">
       <Heading size="md">Encomenda</Heading>
-
-      <Stack spacing="6">
-        <OrderSummaryItem label="Subtotal" value={597} />
-        <OrderSummaryItem label="Shipping + Tax">
-          <Link href="#" textDecor="underline">
-            Calculate shipping
-          </Link>
-        </OrderSummaryItem>
-        <OrderSummaryItem label="Coupon Code">
-          <Link href="#" textDecor="underline">
-            Add coupon code
-          </Link>
-        </OrderSummaryItem>
-        <Flex justify="space-between">
-          <Text fontSize="lg" fontWeight="semibold">
-            Total
-          </Text>
-          <Text fontSize="xl" fontWeight="extrabold">
-            {597}
-          </Text>
-        </Flex>
-      </Stack>
       <Button colorScheme="cyan" size="lg" fontSize="md" rightIcon={<FaArrowRight />} onClick={() => handleEncomenda()}>
         Comprar
       </Button>

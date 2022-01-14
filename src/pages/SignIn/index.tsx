@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { Flex, Text, Stack, FormLabel, FormControl, Button, Divider, Grid, Heading, Link } from "@chakra-ui/react";
+import { Flex, Text, Stack, FormLabel, FormControl, Button, Divider, Grid, Heading } from "@chakra-ui/react";
 import { Link as RouterLink } from 'react-router-dom'
 
 import { AuthContext } from "../../contexts/Auth";
@@ -20,7 +20,7 @@ export function SignIn() {
         } else {
             navigate('/')
         }
-    }, [])
+    }, [isAuth])
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')

@@ -36,8 +36,8 @@ export function ProductItem({ id, nome, imagemUrl, categoria, descricao, preco }
                 </Text>
                 <Text fontSize="large" fontWeight="bold" color='gray.300'>{preco} €</Text>
             </Stack>
-            <Text>{descricao}</Text>
-            <Button colorScheme="cyan" type="button" isFullWidth onClick={() => handleAddProduct(id)}>
+            <Text minH='auto'>{descricao}</Text>
+            <Button colorScheme="cyan" type="button" mt="auto" onClick={() => handleAddProduct(id)} >
                 Adicionar ao carrinho
             </Button>
         </Stack>

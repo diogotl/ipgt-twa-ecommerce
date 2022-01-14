@@ -3,7 +3,7 @@ import { Flex, Text, Stack, IconButton } from '@chakra-ui/react'
 
 import { CartContext } from '../../../contexts/CartContext'
 
-import { CartProductMeta } from '../../Cart/CartMeta'
+import { CartProduct } from '../../Cart/CartProduct'
 
 import { IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp } from 'react-icons/io5'
 
@@ -31,7 +31,7 @@ export function CartItem(product: Product) {
 
     return (
         <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
-            <CartProductMeta
+            <CartProduct
                 nome={product.nome}
                 imagemURL={product.imagemUrl}
                 categoria={product.categoria}
@@ -43,7 +43,7 @@ export function CartItem(product: Product) {
                     <Text>{product.quantidade}</Text>
                     <IconButton aria-label="aumentar" variant='ghost' color="cyan.300" icon={<IoChevronUpSharp />} onClick={() => handleProductIncrement(product)} />
                 </Stack>
-                <Text>{product.preco}</Text>
+                <Text>{product.preco} €</Text>
                 <IconButton aria-label={`Delete ${product.nome} from cart`} variant='ghost' icon={<IoCloseSharp />} onClick={() => removeProduct(product.id)} />
             </Flex>
         </Flex>

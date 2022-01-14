@@ -1,7 +1,6 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { AuthContext } from "./Auth";
 
 //#region 
 interface Product {
@@ -23,7 +22,6 @@ interface CartContextData {
     getProducts(): Promise<void>
     createProduct(data: Product): Promise<void>;
     deleteProduct(id: number): Promise<void>;
-    setProducts: any
 }
 
 //#endregion
@@ -67,7 +65,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
     }
 
     return (
-        <ProductsContext.Provider value={{ products, createProduct, deleteProduct, getProducts, setProducts }} >
+        <ProductsContext.Provider value={{ products, createProduct, deleteProduct, getProducts }} >
             {children}
         </ProductsContext.Provider>
     )

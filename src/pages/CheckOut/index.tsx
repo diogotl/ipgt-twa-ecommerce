@@ -21,12 +21,10 @@ export function CheckOut() {
                     direction={{ base: 'column', lg: 'row' }}
                     spacing="4rem"
                 >
-
                     <SideNavEncomenda />
-
                     <Stack spacing={{ base: '8', md: '10' }} flex="2">
                         <Text fontSize="2xl" fontWeight="extrabold">
-                            Carrinho ({cart.length > 0 ? cart.length : <Text as="span" fontWeight="medium" textColor="cyan.300">  Sem </Text>} <Text as="span" textColor="cyan.300">itens no carrinho</Text> )
+                            Carrinho ( {cart.length > 0 ? cart.length : <Text as="span" textColor="cyan.300" fontWeight="normal">  Sem </Text>} <Text as="span" textColor="cyan.300"  fontWeight="normal">itens no carrinho</Text> )
                         </Text>
 
                         <Stack spacing="6">
@@ -35,7 +33,6 @@ export function CheckOut() {
                             ))}
                         </Stack>
                     </Stack>
-
                     <Flex direction="column" align="center" flex="1">
                         <CartOrder />
                         <HStack mt="6" fontWeight="semibold">

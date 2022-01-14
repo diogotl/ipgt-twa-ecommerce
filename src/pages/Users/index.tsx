@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Icon, Link, Table, Tbody, Td, Th, Thead, Tr, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
@@ -53,11 +53,7 @@ export function Users() {
                         <Table colorScheme="whiteAlpha">
                             <Thead>
                                 <Tr>
-                                    <Th px="6" color="gray.300" width="8">
-                                        <Checkbox colorScheme="pink" />
-                                    </Th>
                                     <Th>Utilizador</Th>
-
                                     <Th width="6"></Th>
                                 </Tr>
                             </Thead>
@@ -65,9 +61,7 @@ export function Users() {
                                 {users.map(user => {
                                     return (
                                         <Tr key={user.utilizador}>
-                                            <Td px="4">
-                                                <Checkbox colorScheme="pink" />
-                                            </Td>
+                                          
                                             <Td>
                                                 <Box>
                                                     <Text fontWeight="bold">{user.nome}</Text>
