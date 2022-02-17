@@ -14,8 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### This project was made for a React module
 
-The module is worth 5 ETS and served as an introduction to modern web application development with JavaScript. The main focus was to build an e-commerce with ReactJS that use REST APIs built with Java that was provided by the teacher. The API is not included in this repository and it doesn't work anymore because the teacher has already taken it down.
-
+The module is worth 5 ETS and served as an introduction to modern web application development with JavaScript. The main focus was to build an e-commerce app with ReactJS that had to access some data that had to be fetched from a REST API that was provided by the teacher. The API is not included in this repository and the project itself doesn't work anymore because the teacher has already taken it down.
 
 As I already had knowledge of javascript I decided to challenge myself and use some tools that I had never used and that were not required for the project such as TypeScript and ChakraUI.The application itself is not very complex and has some cool features so feel free to copy some code if you find it interesting. 😊
 
