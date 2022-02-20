@@ -1,7 +1,7 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
-import { Store } from '../pages/Store'
-import { CheckOut } from '../pages/CheckOut'
+import { Store } from '../pages/Store';
+import { CheckOut } from '../pages/CheckOut';
 import { Users } from '../pages/Users';
 import { SignIn } from '../pages/SignIn';
 import { Products } from '../pages/Products';
